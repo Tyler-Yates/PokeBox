@@ -35,6 +35,8 @@ public class SaveFileReader {
         System.out.println("Casino coins: " + casinoCoins);
 
         final List<Pokemon> party = PokemonDecoder.decodePokemonPartyList(ByteUtil.getBytes(bytes, 0x2F2C, 404));
-        System.out.println(party.get(0));
+        for (final Pokemon pokemon : party) {
+            System.out.println(pokemon);
+        }
     }
 }
