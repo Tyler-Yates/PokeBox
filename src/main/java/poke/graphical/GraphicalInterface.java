@@ -2,6 +2,8 @@ package poke.graphical;
 
 import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
+import poke.graphical.elements.AbstractElement;
+import poke.graphical.elements.TrainerPanel;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -17,10 +19,13 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GraphicalInterface extends JPanel implements KeyListener {
     private static final double VERSION = 0.1;
     public static JFrame frame;
+    private final List<AbstractElement> elements = new ArrayList<>();
     private SaveFile saveFile = null;
 
     /**
@@ -39,10 +44,15 @@ public class GraphicalInterface extends JPanel implements KeyListener {
 
     public static void main(String[] args) throws IOException {
         final GraphicalInterface graphicalInterface = new GraphicalInterface();
+        graphicalInterface.initButtons();
         if (args.length == 1) {
             graphicalInterface.saveFile = SaveFileReader.readSaveFile(new File(args[0]));
             graphicalInterface.repaint();
         }
+    }
+
+    private void initButtons() {
+        elements.add(new TrainerPanel(this));
     }
 
     @Override
@@ -57,6 +67,10 @@ public class GraphicalInterface extends JPanel implements KeyListener {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.PLAIN, 12));
             g.drawString(saveFile.getFileLocation(), 10, 20);
+
+            for (final AbstractElement element : elements) {
+                element.draw(g, frame);
+            }
         }
     }
 
