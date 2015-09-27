@@ -43,11 +43,9 @@ class PokemonDecoder {
     static List<Pokemon> decodeBoxPokemonList(byte[] bytes) {
         final int numPokemon = bytes[0];
         if (numPokemon < 0 || numPokemon > MAX_BOX_SLOTS) {
-            System.out.println("Number of pokemon: 0");
             return Collections.emptyList();
         }
 
-        System.out.println("Number of pokemon: " + numPokemon);
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         final int capacity = 20;
         for (int i = 0; i < numPokemon; i++) {
