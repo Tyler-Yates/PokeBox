@@ -1,17 +1,23 @@
 package poke.graphical;
 
 import poke.data.SaveFile;
+import poke.decode.SaveFileReader;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 
-public class GraphicalInterface extends JPanel {
+public class GraphicalInterface extends JPanel implements KeyListener {
     private static final double VERSION = 0.1;
     public static JFrame frame;
     private SaveFile saveFile = null;
@@ -26,7 +32,7 @@ public class GraphicalInterface extends JPanel {
         frame.setSize(1024, 768);
         //frame.addMouseMotionListener(this);
         //frame.addMouseListener(this);
-        //frame.addKeyListener(this);
+        frame.addKeyListener(this);
         frame.add(this);
     }
 
@@ -60,5 +66,36 @@ public class GraphicalInterface extends JPanel {
         int y = (panelHeight - textHeight) / 2 + fm.getAscent();
 
         g.drawString(s, x, y);  // Draw the string.
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (Character.toUpperCase(e.getKeyChar()) == 'L') {
+            final JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Save files", "sav"));
+            int returnVal = fileChooser.showOpenDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                try {
+                    System.out.print("Loading save file...");
+                    saveFile = SaveFileReader.readSaveFile(fileChooser.getSelectedFile());
+                    System.out.println("Done!\n");
+                    System.out.println(saveFile.toString());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                System.out.println("Failed!\nAborted opening file");
+            }
+        }
     }
 }
