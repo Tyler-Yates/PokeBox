@@ -18,7 +18,11 @@ public class PokemonBuilder {
     private int defenseEv;
     private int speedEv;
     private int specialEv;
-    private int iv;
+    private int attackIv;
+    private int defenseIv;
+    private int speedIv;
+    private int specialIv;
+    private int hpIv;
     private int move1pp;
     private int move2pp;
     private int move3pp;
@@ -115,8 +119,28 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder setIv(int iv) {
-        this.iv = iv;
+    public PokemonBuilder setAttackIv(int attackIv) {
+        this.attackIv = attackIv;
+        return this;
+    }
+
+    public PokemonBuilder setDefenseIv(int defenseIv) {
+        this.defenseIv = defenseIv;
+        return this;
+    }
+
+    public PokemonBuilder setSpeedIv(int speedIv) {
+        this.speedIv = speedIv;
+        return this;
+    }
+
+    public PokemonBuilder setSpecialIv(int specialIv) {
+        this.specialIv = specialIv;
+        return this;
+    }
+
+    public PokemonBuilder setHpIv(int hpIv) {
+        this.hpIv = hpIv;
         return this;
     }
 
@@ -171,9 +195,8 @@ public class PokemonBuilder {
     }
 
     public Pokemon createPokemon() {
-        return new Pokemon(species, currentHp, statusCondition, type1, type2, catchRate, move1,
-                move2, move3, move4, originalTrainerId, xp, hpEv, attackEv, defenseEv, speedEv,
-                specialEv, iv, move1pp, move2pp, move3pp, move4pp, level, maxHp, attack, defense,
-                speed, special);
+        return new Pokemon(species, currentHp, statusCondition, type1, type2, catchRate, move1, move2, move3, move4,
+                originalTrainerId, xp, hpEv, attackEv, defenseEv, speedEv, specialEv, attackIv, defenseIv, speedIv,
+                specialIv, hpIv, move1pp, move2pp, move3pp, move4pp, level, maxHp, attack, defense, speed, special);
     }
 }

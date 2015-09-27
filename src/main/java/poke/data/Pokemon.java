@@ -18,7 +18,11 @@ public class Pokemon {
     final int defenseEv;
     final int speedEv;
     final int specialEv;
-    final int iv;
+    final int attackIv;
+    final int defenseIv;
+    final int speedIv;
+    final int specialIv;
+    final int hpIv;
     final int move1pp;
     final int move2pp;
     final int move3pp;
@@ -31,10 +35,10 @@ public class Pokemon {
     final int special;
 
     Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
-            Move move1, Move move2, Move move3, Move move4, int
-            originalTrainerId, int xp, int hpEv, int attackEv, int defenseEv, int speedEv, int
-            specialEv, int iv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int
-            maxHp, int attack, int defense, int speed, int special) {
+            Move move1, Move move2, Move move3, Move move4, int originalTrainerId, int xp, int hpEv, int attackEv,
+            int defenseEv, int speedEv, int specialEv, int attackIv, int defenseIv, int speedIv, int specialIv,
+            int hpIv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int maxHp, int attack, int defense,
+            int speed, int special) {
         this.species = species;
         this.currentHp = currentHp;
         this.statusCondition = statusCondition;
@@ -52,7 +56,11 @@ public class Pokemon {
         this.defenseEv = defenseEv;
         this.speedEv = speedEv;
         this.specialEv = specialEv;
-        this.iv = iv;
+        this.attackIv = attackIv;
+        this.defenseIv = defenseIv;
+        this.speedIv = speedIv;
+        this.specialIv = specialIv;
+        this.hpIv = hpIv;
         this.move1pp = move1pp;
         this.move2pp = move2pp;
         this.move3pp = move3pp;
@@ -133,8 +141,24 @@ public class Pokemon {
         return specialEv;
     }
 
-    public int getIv() {
-        return iv;
+    public int getAttackIv() {
+        return attackIv;
+    }
+
+    public int getDefenseIv() {
+        return defenseIv;
+    }
+
+    public int getSpeedIv() {
+        return speedIv;
+    }
+
+    public int getSpecialIv() {
+        return specialIv;
+    }
+
+    public int getHpIv() {
+        return hpIv;
     }
 
     public int getMove1pp() {
@@ -197,7 +221,11 @@ public class Pokemon {
                 ", defenseEv=" + defenseEv +
                 ", speedEv=" + speedEv +
                 ", specialEv=" + specialEv +
-                ", iv=" + iv +
+                ", attackIv=" + attackIv +
+                ", defenseIv=" + defenseIv +
+                ", speedIv=" + speedIv +
+                ", specialIv=" + specialIv +
+                ", hpIv=" + hpIv +
                 ", move1pp=" + move1pp +
                 ", move2pp=" + move2pp +
                 ", move3pp=" + move3pp +
