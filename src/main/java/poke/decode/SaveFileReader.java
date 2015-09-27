@@ -3,9 +3,10 @@ package poke.decode;
 import poke.data.Pokemon;
 import poke.util.ByteUtil;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -14,14 +15,15 @@ public class SaveFileReader {
     private static final int BOX_LENGTH = 1122;
 
     public static void main(String[] args) throws IOException {
-        final ClassLoader classLoader = SaveFileReader.class.getClassLoader();
-        final URL resource = classLoader.getResource("yellow.sav");
-        if (resource == null) {
-            System.err.println("Cannot find file!");
-            return;
+        final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Save files", "sav"));
+        int returnVal = fileChooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            readSaveFile(fileChooser.getSelectedFile());
+        } else {
+            System.out.println("Aborted opening file");
         }
-        final File file = new File(resource.getFile());
-        readSaveFile(file);
     }
 
     public static void readSaveFile(File saveFile) throws IOException {
