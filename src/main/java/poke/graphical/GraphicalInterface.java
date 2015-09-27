@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicalInterface extends JPanel implements KeyListener {
@@ -36,8 +37,12 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         frame.add(this);
     }
 
-    public static void main(String[] args) {
-        new GraphicalInterface();
+    public static void main(String[] args) throws IOException {
+        final GraphicalInterface graphicalInterface = new GraphicalInterface();
+        if (args.length == 1) {
+            graphicalInterface.saveFile = SaveFileReader.readSaveFile(new File(args[0]));
+            graphicalInterface.repaint();
+        }
     }
 
     @Override
