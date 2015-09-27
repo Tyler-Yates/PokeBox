@@ -7,10 +7,10 @@ public class Pokemon {
     final Type type1;
     final Type type2;
     final int catchRate;
-    final int move1;
-    final int move2;
-    final int move3;
-    final int move4;
+    final Move move1;
+    final Move move2;
+    final Move move3;
+    final Move move4;
     final int originalTrainerId;
     final int xp;
     final int hpEv;
@@ -30,8 +30,8 @@ public class Pokemon {
     final int speed;
     final int special;
 
-    Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type
-            type2, int catchRate, int move1, int move2, int move3, int move4, int
+    Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
+            Move move1, Move move2, Move move3, Move move4, int
             originalTrainerId, int xp, int hpEv, int attackEv, int defenseEv, int speedEv, int
             specialEv, int iv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int
             maxHp, int attack, int defense, int speed, int special) {
@@ -89,19 +89,19 @@ public class Pokemon {
         return catchRate;
     }
 
-    public int getMove1() {
+    public Move getMove1() {
         return move1;
     }
 
-    public int getMove2() {
+    public Move getMove2() {
         return move2;
     }
 
-    public int getMove3() {
+    public Move getMove3() {
         return move3;
     }
 
-    public int getMove4() {
+    public Move getMove4() {
         return move4;
     }
 
@@ -186,10 +186,10 @@ public class Pokemon {
                 ", type1=" + type1 +
                 ", type2=" + type2 +
                 ", catchRate=" + catchRate +
-                ", move1=" + move1 +
-                ", move2=" + move2 +
-                ", move3=" + move3 +
-                ", move4=" + move4 +
+                ", move1=" + Move.getMoveName(move1) +
+                ", move2=" + Move.getMoveName(move2) +
+                ", move3=" + Move.getMoveName(move3) +
+                ", move4=" + Move.getMoveName(move4) +
                 ", originalTrainerId=" + originalTrainerId +
                 ", xp=" + xp +
                 ", hpEv=" + hpEv +

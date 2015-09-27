@@ -7,10 +7,10 @@ public class PokemonBuilder {
     private Type type1;
     private Type type2;
     private int catchRate;
-    private int move1;
-    private int move2;
-    private int move3;
-    private int move4;
+    private Move move1;
+    private Move move2;
+    private Move move3;
+    private Move move4;
     private int originalTrainerId;
     private int xp;
     private int hpEv;
@@ -60,22 +60,22 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder setMove1(int move1) {
+    public PokemonBuilder setMove1(Move move1) {
         this.move1 = move1;
         return this;
     }
 
-    public PokemonBuilder setMove2(int move2) {
+    public PokemonBuilder setMove2(Move move2) {
         this.move2 = move2;
         return this;
     }
 
-    public PokemonBuilder setMove3(int move3) {
+    public PokemonBuilder setMove3(Move move3) {
         this.move3 = move3;
         return this;
     }
 
-    public PokemonBuilder setMove4(int move4) {
+    public PokemonBuilder setMove4(Move move4) {
         this.move4 = move4;
         return this;
     }
