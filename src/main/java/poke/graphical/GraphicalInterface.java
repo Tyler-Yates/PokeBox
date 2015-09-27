@@ -48,6 +48,10 @@ public class GraphicalInterface extends JPanel implements KeyListener {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 16));
             drawStringCentered("Press 'L' to load a save file", g);
+        } else {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.PLAIN, 12));
+            g.drawString(saveFile.getFileLocation(), 10, 20);
         }
     }
 
@@ -90,6 +94,7 @@ public class GraphicalInterface extends JPanel implements KeyListener {
                     saveFile = SaveFileReader.readSaveFile(fileChooser.getSelectedFile());
                     System.out.println("Done!\n");
                     System.out.println(saveFile.toString());
+                    repaint();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

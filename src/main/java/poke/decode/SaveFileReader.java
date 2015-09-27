@@ -54,6 +54,6 @@ public class SaveFileReader {
             boxes.add(box);
         }
 
-        return new SaveFile(trainer, party, boxes);
+        return new SaveFile(saveFile.getAbsolutePath(), trainer, party, boxes);
     }
 }
