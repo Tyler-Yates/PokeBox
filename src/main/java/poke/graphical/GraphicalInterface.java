@@ -55,6 +55,10 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         elements.add(new TrainerPanel(this));
     }
 
+    public SaveFile getSaveFile() {
+        return saveFile;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
