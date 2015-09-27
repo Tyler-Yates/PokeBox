@@ -9,24 +9,32 @@ import poke.data.Type;
 import poke.util.ByteUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class PokemonDecoder {
     private static final int PARTY_POKEMON_LENGTH = 44;
     private static final int BOX_POKEMON_LENGTH = 33;
+    private static final int MAX_BOX_SLOTS = 20;
 
     static List<Pokemon> decodePokemonPartyList(byte[] bytes) {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(decodePartyPokemon(
-                    ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
+            pokemon.add(
+                    decodePartyPokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
         }
         return pokemon;
     }
 
     static List<Pokemon> decodeBoxPokemonList(byte[] bytes) {
         final int numPokemon = bytes[0];
+        if (numPokemon < 0 || numPokemon > MAX_BOX_SLOTS) {
+            System.out.println("Number of pokemon: 0");
+            return Collections.emptyList();
+        }
+
+        System.out.println("Number of pokemon: " + numPokemon);
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
             pokemon.add(decodeBoxPokemon(ByteUtil.getBytes(bytes, 22 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH)));
