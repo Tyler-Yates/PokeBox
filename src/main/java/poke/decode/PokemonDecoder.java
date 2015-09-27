@@ -20,7 +20,7 @@ class PokemonDecoder {
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
             pokemon.add(decodePartyPokemon(
-                    ByteUtil.getBytes(bytes, numPokemon + 1 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
+                    ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
         }
         return pokemon;
     }
@@ -29,8 +29,7 @@ class PokemonDecoder {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(decodeBoxPokemon(
-                    ByteUtil.getBytes(bytes, numPokemon + 1 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH)));
+            pokemon.add(decodeBoxPokemon(ByteUtil.getBytes(bytes, 22 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH)));
         }
         return pokemon;
     }
