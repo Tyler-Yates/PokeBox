@@ -23,10 +23,14 @@ public class PokemonBuilder {
     private int speedIv;
     private int specialIv;
     private int hpIv;
-    private int move1pp;
-    private int move2pp;
-    private int move3pp;
-    private int move4pp;
+    private int currentMove1pp;
+    private int currentMove2pp;
+    private int currentMove3pp;
+    private int currentMove4pp;
+    private int move1ppUps;
+    private int move2ppUps;
+    private int move3ppUps;
+    private int move4ppUps;
     private int level;
     private int maxHp;
     private int attack;
@@ -144,23 +148,43 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder setMove1pp(int move1pp) {
-        this.move1pp = move1pp;
+    public PokemonBuilder setCurrentMove1pp(int currentMove1pp) {
+        this.currentMove1pp = currentMove1pp;
         return this;
     }
 
-    public PokemonBuilder setMove2pp(int move2pp) {
-        this.move2pp = move2pp;
+    public PokemonBuilder setCurrentMove2pp(int currentMove2pp) {
+        this.currentMove2pp = currentMove2pp;
         return this;
     }
 
-    public PokemonBuilder setMove3pp(int move3pp) {
-        this.move3pp = move3pp;
+    public PokemonBuilder setCurrentMove3pp(int currentMove3pp) {
+        this.currentMove3pp = currentMove3pp;
         return this;
     }
 
-    public PokemonBuilder setMove4pp(int move4pp) {
-        this.move4pp = move4pp;
+    public PokemonBuilder setCurrentMove4pp(int currentMove4pp) {
+        this.currentMove4pp = currentMove4pp;
+        return this;
+    }
+
+    public PokemonBuilder setMove1ppUps(int move1ppUps) {
+        this.move1ppUps = move1ppUps;
+        return this;
+    }
+
+    public PokemonBuilder setMove2ppUps(int move2ppUps) {
+        this.move2ppUps = move2ppUps;
+        return this;
+    }
+
+    public PokemonBuilder setMove3ppUps(int move3ppUps) {
+        this.move3ppUps = move3ppUps;
+        return this;
+    }
+
+    public PokemonBuilder setMove4ppUps(int move4ppUps) {
+        this.move4ppUps = move4ppUps;
         return this;
     }
 
@@ -197,6 +221,7 @@ public class PokemonBuilder {
     public Pokemon createPokemon() {
         return new Pokemon(species, currentHp, statusCondition, type1, type2, catchRate, move1, move2, move3, move4,
                 originalTrainerId, xp, hpEv, attackEv, defenseEv, speedEv, specialEv, attackIv, defenseIv, speedIv,
-                specialIv, hpIv, move1pp, move2pp, move3pp, move4pp, level, maxHp, attack, defense, speed, special);
+                specialIv, hpIv, currentMove1pp, currentMove2pp, currentMove3pp, currentMove4pp, move1ppUps, move2ppUps,
+                move3ppUps, move4ppUps, level, maxHp, attack, defense, speed, special);
     }
 }

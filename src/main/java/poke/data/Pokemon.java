@@ -23,10 +23,14 @@ public class Pokemon {
     final int speedIv;
     final int specialIv;
     final int hpIv;
-    final int move1pp;
-    final int move2pp;
-    final int move3pp;
-    final int move4pp;
+    final int currentMove1pp;
+    final int currentMove2pp;
+    final int currentMove3pp;
+    final int currentMove4pp;
+    final int move1ppUps;
+    final int move2ppUps;
+    final int move3ppUps;
+    final int move4ppUps;
     final int level;
     final int maxHp;
     final int attack;
@@ -37,8 +41,9 @@ public class Pokemon {
     Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
             Move move1, Move move2, Move move3, Move move4, int originalTrainerId, int xp, int hpEv, int attackEv,
             int defenseEv, int speedEv, int specialEv, int attackIv, int defenseIv, int speedIv, int specialIv,
-            int hpIv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int maxHp, int attack, int defense,
-            int speed, int special) {
+            int hpIv, int currentMove1pp, int currentMove2pp, int currentMove3pp, int currentMove4pp, int move1ppUps,
+            int move2ppUps, int move3ppUps, int move4ppUps, int level, int maxHp, int attack, int defense, int speed,
+            int special) {
         this.species = species;
         this.currentHp = currentHp;
         this.statusCondition = statusCondition;
@@ -61,10 +66,14 @@ public class Pokemon {
         this.speedIv = speedIv;
         this.specialIv = specialIv;
         this.hpIv = hpIv;
-        this.move1pp = move1pp;
-        this.move2pp = move2pp;
-        this.move3pp = move3pp;
-        this.move4pp = move4pp;
+        this.currentMove1pp = currentMove1pp;
+        this.currentMove2pp = currentMove2pp;
+        this.currentMove3pp = currentMove3pp;
+        this.currentMove4pp = currentMove4pp;
+        this.move1ppUps = move1ppUps;
+        this.move2ppUps = move2ppUps;
+        this.move3ppUps = move3ppUps;
+        this.move4ppUps = move4ppUps;
         this.level = level;
         this.maxHp = maxHp;
         this.attack = attack;
@@ -161,20 +170,36 @@ public class Pokemon {
         return hpIv;
     }
 
-    public int getMove1pp() {
-        return move1pp;
+    public int getCurrentMove1pp() {
+        return currentMove1pp;
     }
 
-    public int getMove2pp() {
-        return move2pp;
+    public int getCurrentMove2pp() {
+        return currentMove2pp;
     }
 
-    public int getMove3pp() {
-        return move3pp;
+    public int getCurrentMove3pp() {
+        return currentMove3pp;
     }
 
-    public int getMove4pp() {
-        return move4pp;
+    public int getCurrentMove4pp() {
+        return currentMove4pp;
+    }
+
+    public int getMove1ppUps() {
+        return move1ppUps;
+    }
+
+    public int getMove2ppUps() {
+        return move2ppUps;
+    }
+
+    public int getMove3ppUps() {
+        return move3ppUps;
+    }
+
+    public int getMove4ppUps() {
+        return move4ppUps;
     }
 
     public int getLevel() {
@@ -226,10 +251,14 @@ public class Pokemon {
                 ", speedIv=" + speedIv +
                 ", specialIv=" + specialIv +
                 ", hpIv=" + hpIv +
-                ", move1pp=" + move1pp +
-                ", move2pp=" + move2pp +
-                ", move3pp=" + move3pp +
-                ", move4pp=" + move4pp +
+                ", currentMove1pp=" + currentMove1pp +
+                ", currentMove2pp=" + currentMove2pp +
+                ", currentMove3pp=" + currentMove3pp +
+                ", currentMove4pp=" + currentMove4pp +
+                ", move1ppUps=" + move1ppUps +
+                ", move2ppUps=" + move2ppUps +
+                ", move3ppUps=" + move3ppUps +
+                ", move4ppUps=" + move4ppUps +
                 ", level=" + level +
                 ", maxHp=" + maxHp +
                 ", attack=" + attack +
