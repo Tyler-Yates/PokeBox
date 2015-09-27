@@ -37,6 +37,8 @@ public class PokemonBuilder {
     private int defense;
     private int speed;
     private int special;
+    private String originalTrainerName;
+    private String nickname;
 
     public PokemonBuilder setSpecies(Species species) {
         this.species = species;
@@ -218,10 +220,20 @@ public class PokemonBuilder {
         return this;
     }
 
+    public PokemonBuilder setOriginalTrainerName(String originalTrainerName) {
+        this.originalTrainerName = originalTrainerName;
+        return this;
+    }
+
+    public PokemonBuilder setNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
     public Pokemon createPokemon() {
         return new Pokemon(species, currentHp, statusCondition, type1, type2, catchRate, move1, move2, move3, move4,
                 originalTrainerId, xp, hpEv, attackEv, defenseEv, speedEv, specialEv, attackIv, defenseIv, speedIv,
                 specialIv, hpIv, currentMove1pp, currentMove2pp, currentMove3pp, currentMove4pp, move1ppUps, move2ppUps,
-                move3ppUps, move4ppUps, level, maxHp, attack, defense, speed, special);
+                move3ppUps, move4ppUps, level, maxHp, attack, defense, speed, special, originalTrainerName, nickname);
     }
 }

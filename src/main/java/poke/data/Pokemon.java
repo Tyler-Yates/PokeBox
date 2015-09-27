@@ -37,13 +37,15 @@ public class Pokemon {
     final int defense;
     final int speed;
     final int special;
+    final String originalTrainerName;
+    final String nickname;
 
     Pokemon(Species species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
             Move move1, Move move2, Move move3, Move move4, int originalTrainerId, int xp, int hpEv, int attackEv,
             int defenseEv, int speedEv, int specialEv, int attackIv, int defenseIv, int speedIv, int specialIv,
             int hpIv, int currentMove1pp, int currentMove2pp, int currentMove3pp, int currentMove4pp, int move1ppUps,
             int move2ppUps, int move3ppUps, int move4ppUps, int level, int maxHp, int attack, int defense, int speed,
-            int special) {
+            int special, String originalTrainerName, String nickname) {
         this.species = species;
         this.currentHp = currentHp;
         this.statusCondition = statusCondition;
@@ -80,6 +82,8 @@ public class Pokemon {
         this.defense = defense;
         this.speed = speed;
         this.special = special;
+        this.originalTrainerName = originalTrainerName;
+        this.nickname = nickname;
     }
 
     public Species getSpecies() {
@@ -226,6 +230,14 @@ public class Pokemon {
         return special;
     }
 
+    public String getOriginalTrainerName() {
+        return originalTrainerName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
     @Override
     public String toString() {
         return "Pokemon{" +
@@ -265,6 +277,8 @@ public class Pokemon {
                 ", defense=" + defense +
                 ", speed=" + speed +
                 ", special=" + special +
+                ", originalTrainerName=" + originalTrainerName +
+                ", nickname=" + nickname +
                 '}';
     }
 }

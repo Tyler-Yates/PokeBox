@@ -16,13 +16,25 @@ class PokemonDecoder {
     private static final int PARTY_POKEMON_LENGTH = 44;
     private static final int BOX_POKEMON_LENGTH = 33;
     private static final int MAX_BOX_SLOTS = 20;
+    private static final int NAME_LENGTH = 11;
 
     static List<Pokemon> decodePokemonPartyList(byte[] bytes) {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
+        final int capacity = 6;
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(
-                    decodePartyPokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
+            final PokemonBuilder pokemonBuilder = decodePartyPokemon(
+                    ByteUtil.getBytes(bytes, capacity + 2 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH));
+
+            final int trainerNameOffset = 1 + (capacity + 1) + capacity * PARTY_POKEMON_LENGTH + i * NAME_LENGTH;
+            pokemonBuilder.setOriginalTrainerName(
+                    CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, trainerNameOffset, NAME_LENGTH)));
+            final int nicknameOffset = 1 + (capacity + 1) + capacity * PARTY_POKEMON_LENGTH + capacity * NAME_LENGTH
+                    + i * NAME_LENGTH;
+            pokemonBuilder.setNickname(
+                    CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, nicknameOffset, NAME_LENGTH)));
+
+            pokemon.add(pokemonBuilder.createPokemon());
         }
         return pokemon;
     }
@@ -36,18 +48,30 @@ class PokemonDecoder {
 
         System.out.println("Number of pokemon: " + numPokemon);
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
+        final int capacity = 20;
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(decodeBoxPokemon(ByteUtil.getBytes(bytes, 22 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH)));
+            final PokemonBuilder pokemonBuilder = decodeBoxPokemon(
+                    ByteUtil.getBytes(bytes, capacity + 2 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH));
+
+            final int trainerNameOffset = 1 + (capacity + 1) + capacity * BOX_POKEMON_LENGTH + i * NAME_LENGTH;
+            pokemonBuilder.setOriginalTrainerName(
+                    CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, trainerNameOffset, NAME_LENGTH)));
+            final int nicknameOffset = 1 + (capacity + 1) + capacity * BOX_POKEMON_LENGTH + capacity * NAME_LENGTH +
+                    i * NAME_LENGTH;
+            pokemonBuilder.setNickname(
+                    CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, nicknameOffset, NAME_LENGTH)));
+
+            pokemon.add(pokemonBuilder.createPokemon());
         }
         return pokemon;
     }
 
-    static Pokemon decodeBoxPokemon(byte[] bytes) {
+    static PokemonBuilder decodeBoxPokemon(byte[] bytes) {
         final PokemonBuilder pokemonBuilder = new PokemonBuilder();
-        return decodeBasicInformation(bytes, pokemonBuilder).createPokemon();
+        return decodeBasicInformation(bytes, pokemonBuilder);
     }
 
-    static Pokemon decodePartyPokemon(byte[] bytes) {
+    static PokemonBuilder decodePartyPokemon(byte[] bytes) {
         final PokemonBuilder pokemonBuilder = new PokemonBuilder();
         decodeBasicInformation(bytes, pokemonBuilder);
         pokemonBuilder.setLevel(Byte.toUnsignedInt(bytes[0x21]));
@@ -56,8 +80,7 @@ class PokemonDecoder {
         pokemonBuilder.setDefense(ByteUtil.getNumber(bytes, 0x26, 2));
         pokemonBuilder.setSpeed(ByteUtil.getNumber(bytes, 0x28, 2));
         pokemonBuilder.setSpecial(ByteUtil.getNumber(bytes, 0x2A, 2));
-
-        return pokemonBuilder.createPokemon();
+        return pokemonBuilder;
     }
 
     private static PokemonBuilder decodeBasicInformation(byte[] bytes, PokemonBuilder pokemonBuilder) {
