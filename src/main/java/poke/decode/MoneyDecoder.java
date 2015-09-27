@@ -1,6 +1,6 @@
 package poke.decode;
 
-public class MoneyDecoder {
+class MoneyDecoder {
 
     static int getMoney(byte[] encodedMoney) {
         final StringBuilder stringBuilder = new StringBuilder();

@@ -1,6 +1,6 @@
 package poke.decode;
 
-public class PpDecoder {
+class PpDecoder {
 
     public static int numberOfPpUps(byte b) {
         return Byte.toUnsignedInt((byte) (b >> 6));

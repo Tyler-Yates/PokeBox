@@ -2,7 +2,7 @@ package poke.decode;
 
 import org.apache.commons.lang.StringUtils;
 
-public class IvDecoder {
+class IvDecoder {
 
     static int getAttackIv(int iv) {
         return (iv & Integer.parseInt("1111000000000000", 2)) >> 12;
