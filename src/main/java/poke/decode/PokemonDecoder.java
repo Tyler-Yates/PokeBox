@@ -1,3 +1,9 @@
+package poke.decode;
+
+import poke.data.Pokemon;
+import poke.data.PokemonBuilder;
+import poke.util.ByteUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +14,7 @@ class PokemonDecoder {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(decodePokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH,
-                    PARTY_POKEMON_LENGTH)));
+            pokemon.add(decodePokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
         }
         return pokemon;
     }

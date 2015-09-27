@@ -1,3 +1,5 @@
+package poke.decode;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,70 @@
+package poke.data;
+
 public class Pokemon {
+    final int species;
+    final int currentHp;
+    final StatusCondition statusCondition;
+    final int type1;
+    final int type2;
+    final int catchRate;
+    final int move1;
+    final int move2;
+    final int move3;
+    final int move4;
+    final int originalTrainerId;
+    final int xp;
+    final int hpEv;
+    final int attackEv;
+    final int defenseEv;
+    final int speedEv;
+    final int specialEv;
+    final int iv;
+    final int move1pp;
+    final int move2pp;
+    final int move3pp;
+    final int move4pp;
+    final int level;
+    final int maxHp;
+    final int attack;
+    final int defense;
+    final int speed;
+    final int special;
+
+    Pokemon(int species, int currentHp, StatusCondition statusCondition, int type1, int
+            type2, int catchRate, int move1, int move2, int move3, int move4, int
+            originalTrainerId, int xp, int hpEv, int attackEv, int defenseEv, int speedEv, int
+            specialEv, int iv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int
+            maxHp, int attack, int defense, int speed, int special) {
+        this.species = species;
+        this.currentHp = currentHp;
+        this.statusCondition = statusCondition;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.catchRate = catchRate;
+        this.move1 = move1;
+        this.move2 = move2;
+        this.move3 = move3;
+        this.move4 = move4;
+        this.originalTrainerId = originalTrainerId;
+        this.xp = xp;
+        this.hpEv = hpEv;
+        this.attackEv = attackEv;
+        this.defenseEv = defenseEv;
+        this.speedEv = speedEv;
+        this.specialEv = specialEv;
+        this.iv = iv;
+        this.move1pp = move1pp;
+        this.move2pp = move2pp;
+        this.move3pp = move3pp;
+        this.move4pp = move4pp;
+        this.level = level;
+        this.maxHp = maxHp;
+        this.attack = attack;
+        this.defense = defense;
+        this.speed = speed;
+        this.special = special;
+    }
+
     public int getSpecies() {
         return species;
     }
@@ -109,70 +175,6 @@ public class Pokemon {
 
     public int getSpecial() {
         return special;
-    }
-
-    final int species;
-    final int currentHp;
-    final StatusCondition statusCondition;
-    final int type1;
-    final int type2;
-    final int catchRate;
-    final int move1;
-    final int move2;
-    final int move3;
-    final int move4;
-    final int originalTrainerId;
-    final int xp;
-    final int hpEv;
-    final int attackEv;
-    final int defenseEv;
-    final int speedEv;
-    final int specialEv;
-    final int iv;
-    final int move1pp;
-    final int move2pp;
-    final int move3pp;
-    final int move4pp;
-    final int level;
-    final int maxHp;
-    final int attack;
-    final int defense;
-    final int speed;
-    final int special;
-
-    Pokemon(int species, int currentHp, StatusCondition statusCondition, int type1, int
-            type2, int catchRate, int move1, int move2, int move3, int move4, int
-            originalTrainerId, int xp, int hpEv, int attackEv, int defenseEv, int speedEv, int
-            specialEv, int iv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int
-            maxHp, int attack, int defense, int speed, int special) {
-        this.species = species;
-        this.currentHp = currentHp;
-        this.statusCondition = statusCondition;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.catchRate = catchRate;
-        this.move1 = move1;
-        this.move2 = move2;
-        this.move3 = move3;
-        this.move4 = move4;
-        this.originalTrainerId = originalTrainerId;
-        this.xp = xp;
-        this.hpEv = hpEv;
-        this.attackEv = attackEv;
-        this.defenseEv = defenseEv;
-        this.speedEv = speedEv;
-        this.specialEv = specialEv;
-        this.iv = iv;
-        this.move1pp = move1pp;
-        this.move2pp = move2pp;
-        this.move3pp = move3pp;
-        this.move4pp = move4pp;
-        this.level = level;
-        this.maxHp = maxHp;
-        this.attack = attack;
-        this.defense = defense;
-        this.speed = speed;
-        this.special = special;
     }
 
     @Override

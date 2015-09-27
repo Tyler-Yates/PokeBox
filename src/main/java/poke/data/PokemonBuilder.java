@@ -1,3 +1,5 @@
+package poke.data;
+
 public class PokemonBuilder {
     private int species;
     private int currentHp;

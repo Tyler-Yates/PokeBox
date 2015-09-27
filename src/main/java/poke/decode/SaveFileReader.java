@@ -1,3 +1,8 @@
+package poke.decode;
+
+import poke.data.Pokemon;
+import poke.util.ByteUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -20,8 +25,7 @@ public class SaveFileReader {
     public static void readSaveFile(File saveFile) throws IOException {
         final byte[] bytes = Files.readAllBytes(saveFile.toPath());
 
-        final String nickname = CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes,
-                0x2598, 11));
+        final String nickname = CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, 0x2598, 11));
         System.out.println(nickname);
 
         final int money = MoneyDecoder.getMoney(ByteUtil.getBytes(bytes, 0x25F3, 3));
@@ -30,8 +34,7 @@ public class SaveFileReader {
         final int casinoCoins = MoneyDecoder.getMoney(ByteUtil.getBytes(bytes, 0x2850, 2));
         System.out.println("Casino coins: " + casinoCoins);
 
-        final List<Pokemon> party = PokemonDecoder.decodePokemonPartyList(ByteUtil.getBytes
-                (bytes, 0x2F2C, 404));
+        final List<Pokemon> party = PokemonDecoder.decodePokemonPartyList(ByteUtil.getBytes(bytes, 0x2F2C, 404));
         System.out.println(party.get(0));
     }
 }

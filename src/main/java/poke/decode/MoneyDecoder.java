@@ -1,3 +1,5 @@
+package poke.decode;
+
 public class MoneyDecoder {
 
     static int getMoney(byte[] encodedMoney) {
