@@ -163,7 +163,7 @@ public class BaseStats {
         baseHp.put(Species.Mew, new Stats(100, 100, 100, 100, 100));
     }
 
-    public static Stats getBaseHp(Species species) {
+    public static Stats getBaseStats(Species species) {
         return baseHp.get(species);
     }
 }

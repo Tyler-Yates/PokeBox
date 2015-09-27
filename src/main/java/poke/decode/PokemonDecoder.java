@@ -7,6 +7,7 @@ import poke.data.Species;
 import poke.data.StatusCondition;
 import poke.data.Type;
 import poke.util.ByteUtil;
+import poke.util.StatsCalculator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,8 +68,10 @@ class PokemonDecoder {
     }
 
     static PokemonBuilder decodeBoxPokemon(byte[] bytes) {
-        final PokemonBuilder pokemonBuilder = new PokemonBuilder();
-        return decodeBasicInformation(bytes, pokemonBuilder);
+        final PokemonBuilder builder = new PokemonBuilder();
+        decodeBasicInformation(bytes, builder);
+        StatsCalculator.calculateAndSetStats(builder);
+        return builder;
     }
 
     static PokemonBuilder decodePartyPokemon(byte[] bytes) {
