@@ -1,6 +1,7 @@
 package poke.decode;
 
 import poke.data.Pokemon;
+import poke.data.Trainer;
 import poke.util.ByteUtil;
 
 import javax.swing.JFileChooser;
@@ -15,6 +16,11 @@ public class SaveFileReader {
     private static final int BOX_LENGTH = 1122;
 
     public static void main(String[] args) throws IOException {
+        if (args.length == 1) {
+            readSaveFile(new File(args[0]));
+            return;
+        }
+
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setFileFilter(new FileNameExtensionFilter("Save files", "sav"));
@@ -29,14 +35,8 @@ public class SaveFileReader {
     public static void readSaveFile(File saveFile) throws IOException {
         final byte[] bytes = Files.readAllBytes(saveFile.toPath());
 
-        final String nickname = CharacterDecoder.decodeCharacters(ByteUtil.getBytes(bytes, 0x2598, 11));
-        System.out.println(nickname);
-
-        final int money = MoneyDecoder.getMoney(ByteUtil.getBytes(bytes, 0x25F3, 3));
-        System.out.println("Money: " + money);
-
-        final int casinoCoins = MoneyDecoder.getMoney(ByteUtil.getBytes(bytes, 0x2850, 2));
-        System.out.println("Casino coins: " + casinoCoins);
+        final Trainer trainer = TrainerDecoder.decodeTrainer(bytes);
+        System.out.println(trainer);
 
         System.out.println("\nParty Pokemon:");
         final List<Pokemon> party = PokemonDecoder.decodePokemonPartyList(ByteUtil.getBytes(bytes, 0x2F2C, 404));
