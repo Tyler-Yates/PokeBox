@@ -13,19 +13,47 @@ import java.util.List;
 
 class PokemonDecoder {
     private static final int PARTY_POKEMON_LENGTH = 44;
+    private static final int BOX_POKEMON_LENGTH = 33;
 
     static List<Pokemon> decodePokemonPartyList(byte[] bytes) {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(
-                    decodePartyPokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
+            pokemon.add(decodePartyPokemon(
+                    ByteUtil.getBytes(bytes, numPokemon + 1 + i * PARTY_POKEMON_LENGTH, PARTY_POKEMON_LENGTH)));
         }
         return pokemon;
     }
 
+    static List<Pokemon> decodeBoxPokemonList(byte[] bytes) {
+        final int numPokemon = bytes[0];
+        final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
+        for (int i = 0; i < numPokemon; i++) {
+            pokemon.add(decodeBoxPokemon(
+                    ByteUtil.getBytes(bytes, numPokemon + 1 + i * BOX_POKEMON_LENGTH, BOX_POKEMON_LENGTH)));
+        }
+        return pokemon;
+    }
+
+    static Pokemon decodeBoxPokemon(byte[] bytes) {
+        final PokemonBuilder pokemonBuilder = new PokemonBuilder();
+        return decodeBasicInformation(bytes, pokemonBuilder).createPokemon();
+    }
+
     static Pokemon decodePartyPokemon(byte[] bytes) {
         final PokemonBuilder pokemonBuilder = new PokemonBuilder();
+        decodeBasicInformation(bytes, pokemonBuilder);
+        pokemonBuilder.setLevel(Byte.toUnsignedInt(bytes[0x21]));
+        pokemonBuilder.setMaxHp(ByteUtil.getNumber(bytes, 0x22, 2));
+        pokemonBuilder.setAttack(ByteUtil.getNumber(bytes, 0x24, 2));
+        pokemonBuilder.setDefense(ByteUtil.getNumber(bytes, 0x26, 2));
+        pokemonBuilder.setSpeed(ByteUtil.getNumber(bytes, 0x28, 2));
+        pokemonBuilder.setSpecial(ByteUtil.getNumber(bytes, 0x2A, 2));
+
+        return pokemonBuilder.createPokemon();
+    }
+
+    private static PokemonBuilder decodeBasicInformation(byte[] bytes, PokemonBuilder pokemonBuilder) {
         pokemonBuilder.setSpecies(Species.getSpecies(Byte.toUnsignedInt(bytes[0x00])));
         pokemonBuilder.setCurrentHp(ByteUtil.getNumber(bytes, 0x01, 2));
         pokemonBuilder.setStatusCondition(StatusCondition.getStatusCondition(bytes[0x04]));
@@ -57,13 +85,6 @@ class PokemonDecoder {
         pokemonBuilder.setCurrentMove3pp(PpDecoder.currentPp(bytes[0x1F]));
         pokemonBuilder.setMove4ppUps(PpDecoder.numberOfPpUps(bytes[0x20]));
         pokemonBuilder.setCurrentMove4pp(PpDecoder.currentPp(bytes[0x20]));
-        pokemonBuilder.setLevel(Byte.toUnsignedInt(bytes[0x21]));
-        pokemonBuilder.setMaxHp(ByteUtil.getNumber(bytes, 0x22, 2));
-        pokemonBuilder.setAttack(ByteUtil.getNumber(bytes, 0x24, 2));
-        pokemonBuilder.setDefense(ByteUtil.getNumber(bytes, 0x26, 2));
-        pokemonBuilder.setSpeed(ByteUtil.getNumber(bytes, 0x28, 2));
-        pokemonBuilder.setSpecial(ByteUtil.getNumber(bytes, 0x2A, 2));
-
-        return pokemonBuilder.createPokemon();
+        return pokemonBuilder;
     }
 }
