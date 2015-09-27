@@ -8,7 +8,7 @@ class PokemonDecoder {
         final int numPokemon = bytes[0];
         final List<Pokemon> pokemon = new ArrayList<>(numPokemon);
         for (int i = 0; i < numPokemon; i++) {
-            pokemon.add(decodePokemon(ByteUtil.getBytes(bytes, 1 + i * PARTY_POKEMON_LENGTH,
+            pokemon.add(decodePokemon(ByteUtil.getBytes(bytes, 8 + i * PARTY_POKEMON_LENGTH,
                     PARTY_POKEMON_LENGTH)));
         }
         return pokemon;
@@ -16,20 +16,10 @@ class PokemonDecoder {
 
     static Pokemon decodePokemon(byte[] bytes) {
         final PokemonBuilder pokemonBuilder = new PokemonBuilder();
-        System.out.println(Integer.toHexString(Byte.toUnsignedInt(bytes[1])));
-        System.out.println(Integer.toHexString(Byte.toUnsignedInt(bytes[2])));
         pokemonBuilder.setSpecies(bytes[0x0]);
-        pokemonBuilder.setCurrentHp(getNumber(bytes, 0x1, 2));
+        pokemonBuilder.setCurrentHp(ByteUtil.getNumber(bytes, 0x1, 2));
+        pokemonBuilder.setLevel(Byte.toUnsignedInt(bytes[0x21]));
 
         return pokemonBuilder.createPokemon();
-    }
-
-    private static int getNumber(byte[] bytes, int offset, int numBytes) {
-        int num = 0;
-        for (int i = 0; i < numBytes; i++) {
-            num <<= 8;
-            num += bytes[offset + i];
-        }
-        return num;
     }
 }
