@@ -1,7 +1,7 @@
 package poke.data;
 
 public class Pokemon {
-    final int species;
+    final Species species;
     final int currentHp;
     final StatusCondition statusCondition;
     final Type type1;
@@ -38,7 +38,7 @@ public class Pokemon {
     final int speed;
     final int special;
 
-    Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
+    Pokemon(Species species, int currentHp, StatusCondition statusCondition, Type type1, Type type2, int catchRate,
             Move move1, Move move2, Move move3, Move move4, int originalTrainerId, int xp, int hpEv, int attackEv,
             int defenseEv, int speedEv, int specialEv, int attackIv, int defenseIv, int speedIv, int specialIv,
             int hpIv, int currentMove1pp, int currentMove2pp, int currentMove3pp, int currentMove4pp, int move1ppUps,
@@ -82,7 +82,7 @@ public class Pokemon {
         this.special = special;
     }
 
-    public int getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
@@ -229,7 +229,7 @@ public class Pokemon {
     @Override
     public String toString() {
         return "Pokemon{" +
-                "species=" + species +
+                "species=" + Species.getName(species) +
                 ", currentHp=" + currentHp +
                 ", statusCondition=" + statusCondition +
                 ", type1=" + type1 +

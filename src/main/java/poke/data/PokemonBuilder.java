@@ -1,7 +1,7 @@
 package poke.data;
 
 public class PokemonBuilder {
-    private int species;
+    private Species species;
     private int currentHp;
     private StatusCondition statusCondition;
     private Type type1;
@@ -38,7 +38,7 @@ public class PokemonBuilder {
     private int speed;
     private int special;
 
-    public PokemonBuilder setSpecies(int species) {
+    public PokemonBuilder setSpecies(Species species) {
         this.species = species;
         return this;
     }
