@@ -4,8 +4,8 @@ public class Pokemon {
     final int species;
     final int currentHp;
     final StatusCondition statusCondition;
-    final int type1;
-    final int type2;
+    final Type type1;
+    final Type type2;
     final int catchRate;
     final int move1;
     final int move2;
@@ -30,7 +30,7 @@ public class Pokemon {
     final int speed;
     final int special;
 
-    Pokemon(int species, int currentHp, StatusCondition statusCondition, int type1, int
+    Pokemon(int species, int currentHp, StatusCondition statusCondition, Type type1, Type
             type2, int catchRate, int move1, int move2, int move3, int move4, int
             originalTrainerId, int xp, int hpEv, int attackEv, int defenseEv, int speedEv, int
             specialEv, int iv, int move1pp, int move2pp, int move3pp, int move4pp, int level, int
@@ -77,11 +77,11 @@ public class Pokemon {
         return statusCondition;
     }
 
-    public int getType1() {
+    public Type getType1() {
         return type1;
     }
 
-    public int getType2() {
+    public Type getType2() {
         return type2;
     }
 

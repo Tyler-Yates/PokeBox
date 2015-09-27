@@ -4,8 +4,8 @@ public class PokemonBuilder {
     private int species;
     private int currentHp;
     private StatusCondition statusCondition;
-    private int type1;
-    private int type2;
+    private Type type1;
+    private Type type2;
     private int catchRate;
     private int move1;
     private int move2;
@@ -45,12 +45,12 @@ public class PokemonBuilder {
         return this;
     }
 
-    public PokemonBuilder setType1(int type1) {
+    public PokemonBuilder setType1(Type type1) {
         this.type1 = type1;
         return this;
     }
 
-    public PokemonBuilder setType2(int type2) {
+    public PokemonBuilder setType2(Type type2) {
         this.type2 = type2;
         return this;
     }
