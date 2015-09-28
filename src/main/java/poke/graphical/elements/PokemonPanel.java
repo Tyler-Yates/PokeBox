@@ -1,18 +1,44 @@
 package poke.graphical.elements;
 
 import poke.data.Pokemon;
+import poke.data.Species;
 import poke.graphical.GraphicalInterface;
+import poke.util.ImageLoader;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.text.NumberFormat;
 
 public class PokemonPanel extends AbstractElement {
-    private static final int width = 150;
+    private static final int width = 200;
     private static final int top = 30;
 
     public PokemonPanel(GraphicalInterface graphicalInterface) {
         super(graphicalInterface);
+    }
+
+    private static void drawHealthBar(Graphics g, int x, int y, int currentHp, int maxHp) {
+        final int bottom = y + 4;
+        final int width = 100;
+        g.drawLine(x, y, x, bottom);
+        g.drawLine(x, bottom, x + width, bottom);
+        g.drawLine(x + width, bottom, x + width, y);
+        final int maxWidth = width - 3;
+        final double percent = Math.min(1.0, 1.0 * currentHp / maxHp);
+        g.setColor(getHpColor(currentHp, maxHp));
+        g.fillRect(x + 2, y, (int) (maxWidth * percent), 3);
+    }
+
+    private static Color getHpColor(int currentHp, int maxHp) {
+        double percent = 1.0 * currentHp / maxHp;
+        if (percent <= 0.33) {
+            return Color.RED;
+        } else if (percent <= 0.66) {
+            return Color.ORANGE;
+        }
+        return Color.GREEN;
     }
 
     @Override
@@ -37,6 +63,20 @@ public class PokemonPanel extends AbstractElement {
             return;
         }
         g.setColor(Color.WHITE);
-        g.drawString(pokemon.getNickname(), textX, top + 20);
+        int y = top + 20;
+        g.drawString(pokemon.getNickname(), textX, y);
+        y += 40;
+        g.drawString("Species: " + Species.getName(pokemon.getSpecies()), textX, y);
+        y += 20;
+        final BufferedImage image = ImageLoader.getImageForPokemon(pokemon);
+        g.drawImage(image, textX, top + 80, frame);
+        y += image.getHeight() + 20;
+        g.drawString("Level: " + pokemon.getLevel(), textX, y);
+        y += 20;
+        g.drawString("XP: " + NumberFormat.getInstance().format(pokemon.getXp()), textX, y);
+        y += 20;
+        drawHealthBar(g, textX, y, pokemon.getCurrentHp(), pokemon.getMaxHp());
+        y += 20;
+        g.drawString("HP: " + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp(), textX, y);
     }
 }
