@@ -2,6 +2,7 @@ package poke.graphical.elements;
 
 import poke.data.Pokemon;
 import poke.data.Species;
+import poke.data.Type;
 import poke.graphical.GraphicalInterface;
 import poke.util.ImageLoader;
 
@@ -57,8 +58,16 @@ public class PokemonPanel extends Element {
         y += 40;
         g.drawString("Species: " + Species.getName(pokemon.getSpecies()), textX, y);
         y += 20;
+        final Type type1 = pokemon.getType1();
+        final Type type2 = pokemon.getType2();
+        if (type1.equals(type2)) {
+            g.drawString("" + pokemon.getType1(), textX, y);
+        } else {
+            g.drawString(pokemon.getType1() + " / " + pokemon.getType2(), textX, y);
+        }
+        y += 20;
         final BufferedImage image = ImageLoader.getImageForPokemon(pokemon);
-        g.drawImage(image, textX, top + 80, frame);
+        g.drawImage(image, textX, y, frame);
         y += image.getHeight() + 20;
         g.drawString("Level: " + pokemon.getLevel(), textX, y);
         y += 20;
