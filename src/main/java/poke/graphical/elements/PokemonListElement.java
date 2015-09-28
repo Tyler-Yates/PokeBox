@@ -1,20 +1,15 @@
 package poke.graphical.elements;
 
-import org.apache.commons.lang.StringUtils;
 import poke.data.Pokemon;
 import poke.graphical.GraphicalInterface;
-import poke.util.PokedexIndex;
+import poke.util.ImageLoader;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,15 +96,9 @@ class PokemonElement extends AbstractElement {
         this.y = y;
         this.pokemon = pokemon;
 
-        final ClassLoader classLoader = BadgeImage.class.getClassLoader();
-        final int pokedexIndex = PokedexIndex.getPokedexIndex(pokemon.getSpecies());
-        final String imageName = StringUtils.leftPad(Integer.toString(pokedexIndex), 3, "0");
-        final URL resource = classLoader.getResource("images/pokemon/" + imageName + ".png");
-        try {
-            bufferedImage = ImageIO.read(new File(resource.getFile()));
+        bufferedImage = ImageLoader.getImageForPokemon(pokemon);
+        if (bufferedImage != null) {
             rectangle = new Rectangle(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -127,6 +116,8 @@ class PokemonElement extends AbstractElement {
 
     @Override
     public void draw(Graphics g, JFrame frame) {
-        g.drawImage(bufferedImage, x, y, frame);
+        if (bufferedImage != null) {
+            g.drawImage(bufferedImage, x, y, frame);
+        }
     }
 }
