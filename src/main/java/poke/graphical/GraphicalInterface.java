@@ -3,7 +3,7 @@ package poke.graphical;
 import poke.data.Pokemon;
 import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
-import poke.graphical.elements.AbstractElement;
+import poke.graphical.elements.Element;
 import poke.graphical.elements.PokemonListElement;
 import poke.graphical.elements.PokemonPanel;
 import poke.graphical.elements.TrainerPanel;
@@ -33,7 +33,7 @@ import java.util.Map;
 public class GraphicalInterface extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
     private static final double VERSION = 0.1;
     public static JFrame frame;
-    private final List<AbstractElement> elements = new ArrayList<>();
+    private final List<Element> elements = new ArrayList<>();
     private SaveFile saveFile = null;
 
     private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
@@ -104,7 +104,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             g.setFont(new Font("Arial", Font.PLAIN, 12));
             g.drawString(saveFile.getFileLocation(), 10, 20);
 
-            for (final AbstractElement element : elements) {
+            for (final Element element : elements) {
                 element.draw(g, frame);
             }
         }
@@ -162,8 +162,8 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     void changePokemonList(int amount) {
         currentPokemonList += amount;
         setCurrentPokemon(null);
-        for (final AbstractElement abstractElement : elements) {
-            abstractElement.handleHover(mouseX, mouseY);
+        for (final Element element : elements) {
+            element.handleHover(mouseX, mouseY);
         }
         repaint();
     }
@@ -184,15 +184,15 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     @Override
     public void mousePressed(MouseEvent e) {
-        for (final AbstractElement abstractElement : elements) {
-            abstractElement.handleClick(getX(e), getY(e), e.getButton());
+        for (final Element element : elements) {
+            element.handleClick(getX(e), getY(e), e.getButton());
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        for (final AbstractElement abstractElement : elements) {
-            abstractElement.handleClick(getX(e), getY(e), e.getButton());
+        for (final Element element : elements) {
+            element.handleClick(getX(e), getY(e), e.getButton());
         }
     }
 
@@ -215,8 +215,8 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     public void mouseMoved(MouseEvent e) {
         final Pokemon original = getCurrentPokemon();
         setCurrentPokemon(null);
-        for (final AbstractElement abstractElement : elements) {
-            abstractElement.handleHover(getX(e), getY(e));
+        for (final Element element : elements) {
+            element.handleHover(getX(e), getY(e));
         }
 
         if (original != getCurrentPokemon()) {

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 import static poke.graphical.util.NumberFormatter.formatNumber;
 
-public class PokemonPanel extends AbstractElement {
+public class PokemonPanel extends Element {
     private static final int width = 200;
     private static final int top = 30;
 

@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokemonListElement extends AbstractElement {
+public class PokemonListElement extends Element {
     private static final int separation = 80;
     private static final int left = 200;
     private static final int top = 70;
@@ -82,7 +82,7 @@ public class PokemonListElement extends AbstractElement {
     }
 }
 
-class PokemonElement extends AbstractElement {
+class PokemonElement extends Element {
     private final int x;
     private final int y;
     private final Pokemon pokemon;

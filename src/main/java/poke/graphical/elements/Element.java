@@ -5,10 +5,10 @@ import poke.graphical.GraphicalInterface;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 
-public abstract class AbstractElement {
+public abstract class Element {
     protected final GraphicalInterface graphicalInterface;
 
-    public AbstractElement(GraphicalInterface graphicalInterface) {
+    public Element(GraphicalInterface graphicalInterface) {
         this.graphicalInterface = graphicalInterface;
     }
 

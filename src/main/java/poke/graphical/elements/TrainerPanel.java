@@ -13,7 +13,7 @@ import java.util.List;
 
 import static poke.graphical.util.NumberFormatter.formatNumber;
 
-public class TrainerPanel extends AbstractElement {
+public class TrainerPanel extends Element {
     private final int width = 150;
     private final int top = 30;
     private final List<BadgeImage> badgeImages = new ArrayList<>();
@@ -64,7 +64,7 @@ public class TrainerPanel extends AbstractElement {
     }
 }
 
-class BadgeImage extends AbstractElement {
+class BadgeImage extends Element {
     private final int x;
     private final int y;
 
