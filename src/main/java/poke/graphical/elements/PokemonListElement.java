@@ -30,26 +30,7 @@ public class PokemonListElement extends Element {
         this.pokemonList = pokemonList;
         this.name = name;
 
-        int x = left;
-        int y = 10;
-        for (int i = 0; i < pokemonList.size(); i++) {
-            if (i % 5 == 0) {
-                x = left;
-                y += separation;
-            } else {
-                x += separation;
-            }
-            pokemonElements.add(new PokemonElement(graphicalInterface, x, y, pokemonList.getPokemon().get(i)));
-        }
-        for (int i = pokemonList.size(); i < pokemonList.getMaxCapacity(); i++) {
-            if (i % 5 == 0) {
-                x = left;
-                y += separation;
-            } else {
-                x += separation;
-            }
-            pokemonElements.add(new EmptyPokemonElement(graphicalInterface, x, y));
-        }
+        handleScreenResize();
     }
 
     @Override
@@ -67,6 +48,39 @@ public class PokemonListElement extends Element {
             if (pokemonElement.isVisible()) {
                 pokemonElement.handleHover(x, y);
             }
+        }
+    }
+
+    @Override
+    public void handleScreenResize() {
+        pokemonElements.clear();
+
+        final int maxX = Math.max(graphicalInterface.getFrame().getWidth() - left - 50 - 60, left + 50);
+        int column = 0;
+        int x = left;
+        int y = 10;
+        for (int i = 0; i < pokemonList.getMaxCapacity(); i++) {
+            if (column % 5 == 0) {
+                x = left;
+                y += separation;
+                column = 0;
+            } else {
+                x += separation;
+            }
+
+            if (x >= maxX) {
+                x = left;
+                y += separation;
+                column = 0;
+            }
+
+            if (i < pokemonList.size()) {
+                pokemonElements.add(new PokemonElement(graphicalInterface, x, y, pokemonList.getPokemon().get(i)));
+            } else {
+                pokemonElements.add(new EmptyPokemonElement(graphicalInterface, x, y));
+            }
+
+            column++;
         }
     }
 

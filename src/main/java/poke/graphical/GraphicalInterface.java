@@ -20,6 +20,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -58,6 +60,28 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         frame.addMouseMotionListener(this);
         frame.addMouseListener(this);
         frame.addKeyListener(this);
+        frame.addComponentListener(new ComponentListener() {
+            @SuppressWarnings("ForLoopReplaceableByForEach")
+            public void componentResized(ComponentEvent e) {
+                for (int i = 0; i < elements.size(); i++) {
+                    Element element = elements.get(i);
+                    element.handleScreenResize();
+                }
+                repaint();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+            }
+        });
         frame.add(this);
     }
 
@@ -114,6 +138,8 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             g.setFont(new Font("Arial", Font.BOLD, 16));
             drawStringCentered("Press 'L' to load a save file", g);
         } else {
+            g.setColor(new Color(216, 223, 213));
+            g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
             // Use indexed for loop to avoid ConcurrentModificationException if a save is loaded
             for (int i = 0; i < elements.size(); i++) {
                 Element element = elements.get(i);
