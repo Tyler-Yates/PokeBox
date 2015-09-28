@@ -90,6 +90,8 @@ class PokemonElement extends Element {
     private BufferedImage bufferedImage;
     private Rectangle rectangle;
 
+    private boolean hover = false;
+
     public PokemonElement(GraphicalInterface graphicalInterface, int x, int y, Pokemon pokemon) {
         super(graphicalInterface);
         this.x = x;
@@ -109,8 +111,10 @@ class PokemonElement extends Element {
 
     @Override
     public void handleHover(int x, int y) {
+        hover = false;
         if (rectangle != null && rectangle.contains(x, y)) {
             graphicalInterface.setCurrentPokemon(pokemon);
+            hover = true;
         }
     }
 
@@ -118,6 +122,10 @@ class PokemonElement extends Element {
     public void draw(Graphics g, JFrame frame) {
         if (bufferedImage != null) {
             g.drawImage(bufferedImage, x, y, frame);
+            if (hover) {
+                g.setColor(Color.BLACK);
+                g.drawRect(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
+            }
         }
     }
 }
