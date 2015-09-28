@@ -1,5 +1,6 @@
 package poke.graphical.elements;
 
+import poke.data.Move;
 import poke.data.Pokemon;
 import poke.data.Species;
 import poke.data.Type;
@@ -89,6 +90,21 @@ public class PokemonPanel extends Element {
         g.drawString("Original Trainer: " + pokemon.getOriginalTrainerName(), textX, y);
         y += 20;
         g.drawString("Original Trainer ID: " + pokemon.getOriginalTrainerId(), textX, y);
+        y += 40;
+        y += drawMove(g, textX, y, 1, pokemon.getMove1(), pokemon.getCurrentMove1pp());
+        y += drawMove(g, textX, y, 2, pokemon.getMove2(), pokemon.getCurrentMove2pp());
+        y += drawMove(g, textX, y, 3, pokemon.getMove3(), pokemon.getCurrentMove3pp());
+        y += drawMove(g, textX, y, 4, pokemon.getMove4(), pokemon.getCurrentMove4pp());
+    }
+
+    private int drawMove(Graphics g, int x, int y, int index, Move move, int currentPp) {
+        final String moveName = Move.getMoveName(move);
+        if (moveName.equals(Move.getMoveName(Move.Struggle))) {
+            return 0;
+        }
+        g.drawString("Move " + index + ": " + Move.getMoveName(move), x, y);
+        g.drawString("    PP: " + currentPp, x, y + 20);
+        return 50;
     }
 
     private void drawHealthBarAndStatusCondition(Graphics g, int x, int y, Pokemon pokemon, JFrame frame) {
