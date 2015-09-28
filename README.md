@@ -4,6 +4,9 @@ PokéBox is a Java application for viewing pokemon contained in emulator save fi
 ## Running the Program
 To graphically view a save file, run the `main()` method of the `PokeBox` class under the `poke.graphical` package. The program will then prompt you to select the save file you want to view. Additionally, you can pass the full filepath of the save file to the program as the first argument to avoid having to choose the file.
 
+## Compatibility
+PokéBox has been tested to work with [VBA-M](http://vba-m.com/) save files. If you are using another emulator the save files may not be read correctly. Create an issue and attach your save file to assist with debugging.
+
 ## Screenshots
 ![Box View](/screenshots/box_view.png?raw=true "Box View")
 ![Party View](/screenshots/party_view.png?raw=true "Party View")
