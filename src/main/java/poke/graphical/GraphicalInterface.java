@@ -7,6 +7,7 @@ import poke.decode.SaveFileReader;
 import poke.graphical.elements.Element;
 import poke.graphical.elements.PokemonListElement;
 import poke.graphical.elements.PokemonPanel;
+import poke.graphical.elements.SaveFileLocationElement;
 import poke.graphical.elements.TooltipElement;
 import poke.graphical.elements.TrainerPanel;
 
@@ -62,6 +63,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     void initButtons() {
         elements.clear();
+        elements.add(new SaveFileLocationElement(this));
         elements.add(new TrainerPanel(this));
         elements.add(new PokemonPanel(this));
         if (saveFile != null) {
@@ -98,6 +100,10 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         this.tooltipElement = new TooltipElement(x, y, text);
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -107,10 +113,6 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             g.setFont(new Font("Arial", Font.BOLD, 16));
             drawStringCentered("Press 'L' to load a save file", g);
         } else {
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.PLAIN, 12));
-            g.drawString(saveFile.getFileLocation(), 10, 20);
-
             for (final Element element : elements) {
                 element.draw(g, frame);
             }
@@ -148,20 +150,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     @Override
     public void keyReleased(KeyEvent e) {
         if (Character.toUpperCase(e.getKeyChar()) == 'L') {
-            final JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Save files", "sav"));
-            int returnVal = fileChooser.showOpenDialog(null);
-
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                try {
-                    loadSaveFile(fileChooser.getSelectedFile());
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                System.out.println("Failed!\nAborted opening file");
-            }
+            chooseSaveFile();
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentPokemonList > 0) {
             changePokemonList(-1);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentPokemonList < 12) {
@@ -176,6 +165,23 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             element.handleHover(mouseX, mouseY);
         }
         repaint();
+    }
+
+    public void chooseSaveFile() {
+        final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Save files", "sav"));
+        int returnVal = fileChooser.showOpenDialog(null);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            try {
+                loadSaveFile(fileChooser.getSelectedFile());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        } else {
+            System.out.println("Failed!\nAborted opening file");
+        }
     }
 
     void loadSaveFile(File file) throws IOException {
