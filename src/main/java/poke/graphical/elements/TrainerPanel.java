@@ -11,9 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static poke.graphical.util.NumberFormatter.formatNumber;
 
 public class TrainerPanel extends AbstractElement {
     private final int width = 150;
@@ -55,8 +56,8 @@ public class TrainerPanel extends AbstractElement {
         final Trainer trainer = graphicalInterface.getSaveFile().getTrainer();
         g.drawString("Trainer: " + trainer.getName(), 10, top + 20);
         g.drawString("ID: " + trainer.getId(), 10, top + 80);
-        g.drawString("Money: $" + NumberFormat.getInstance().format(trainer.getMoney()), 10, top + 100);
-        g.drawString("Casino Coins: " + NumberFormat.getInstance().format(trainer.getCasinoCoins()), 10, top + 120);
+        g.drawString("Money: $" + formatNumber(trainer.getMoney()), 10, top + 100);
+        g.drawString("Casino Coins: " + formatNumber(trainer.getCasinoCoins()), 10, top + 120);
         g.drawString("Time Played: " + trainer.getTimePlayed().split("=")[1].trim().split(" ")[0], 10, top + 140);
         g.drawString("Rival: " + trainer.getRivalName(), 10, top + 160);
 

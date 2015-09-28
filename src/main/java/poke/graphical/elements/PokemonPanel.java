@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
+
+import static poke.graphical.util.NumberFormatter.formatNumber;
 
 public class PokemonPanel extends AbstractElement {
     private static final int width = 200;
@@ -73,7 +74,7 @@ public class PokemonPanel extends AbstractElement {
         y += image.getHeight() + 20;
         g.drawString("Level: " + pokemon.getLevel(), textX, y);
         y += 20;
-        g.drawString("XP: " + NumberFormat.getInstance().format(pokemon.getXp()), textX, y);
+        g.drawString("XP: " + formatNumber(pokemon.getXp()), textX, y);
         y += 20;
         drawHealthBar(g, textX, y, pokemon.getCurrentHp(), pokemon.getMaxHp());
         y += 20;
