@@ -5,6 +5,7 @@ import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
 import poke.graphical.elements.AbstractElement;
 import poke.graphical.elements.PokemonListElement;
+import poke.graphical.elements.PokemonPanel;
 import poke.graphical.elements.TrainerPanel;
 
 import javax.swing.JFileChooser;
@@ -37,6 +38,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
     private int currentPokemonList = 0;
+    private Pokemon currentPokemon = null;
 
     /**
      * Initializes the JFrame
@@ -52,17 +54,10 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         frame.add(this);
     }
 
-    public static void main(String[] args) throws IOException {
-        final GraphicalInterface graphicalInterface = new GraphicalInterface();
-        graphicalInterface.initButtons();
-        if (args.length == 1) {
-            graphicalInterface.loadSaveFile(new File(args[0]));
-        }
-    }
-
-    private void initButtons() {
+    void initButtons() {
         elements.clear();
         elements.add(new TrainerPanel(this));
+        elements.add(new PokemonPanel(this));
         if (saveFile != null) {
             pokemonListIndexToName.clear();
             addNewPokemonList(saveFile.getPartyPokemon(), "Party");
@@ -83,6 +78,14 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     public String getCurrentPokemonList() {
         return pokemonListIndexToName.get(currentPokemonList);
+    }
+
+    public Pokemon getCurrentPokemon() {
+        return currentPokemon;
+    }
+
+    public void setCurrentPokemon(Pokemon pokemon) {
+        this.currentPokemon = pokemon;
     }
 
     @Override
@@ -155,7 +158,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         }
     }
 
-    private void loadSaveFile(File file) throws IOException {
+    void loadSaveFile(File file) throws IOException {
         System.out.print("Loading save file...");
         saveFile = SaveFileReader.readSaveFile(file);
         System.out.println("Done!\n");
@@ -200,8 +203,14 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        final Pokemon original = getCurrentPokemon();
+        setCurrentPokemon(null);
         for (final AbstractElement abstractElement : elements) {
             abstractElement.handleHover(getX(e), getY(e));
+        }
+
+        if (original != getCurrentPokemon()) {
+            repaint();
         }
     }
 
