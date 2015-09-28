@@ -18,6 +18,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GraphicalInterface extends JPanel implements KeyListener {
+public class GraphicalInterface extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
     private static final double VERSION = 0.1;
     public static JFrame frame;
     private final List<AbstractElement> elements = new ArrayList<>();
@@ -43,8 +46,8 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(1024, 768);
-        //frame.addMouseMotionListener(this);
-        //frame.addMouseListener(this);
+        frame.addMouseMotionListener(this);
+        frame.addMouseListener(this);
         frame.addKeyListener(this);
         frame.add(this);
     }
@@ -159,5 +162,54 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         System.out.println(saveFile.toString());
         initButtons();
         repaint();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        for (final AbstractElement abstractElement : elements) {
+            abstractElement.handleClick(getX(e), getY(e), e.getButton());
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        for (final AbstractElement abstractElement : elements) {
+            abstractElement.handleClick(getX(e), getY(e), e.getButton());
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        for (final AbstractElement abstractElement : elements) {
+            abstractElement.handleHover(getX(e), getY(e));
+        }
+    }
+
+    private int getX(MouseEvent e) {
+        return e.getX() - frame.getInsets().left;
+    }
+
+    private int getY(MouseEvent e) {
+        return e.getY() - frame.getInsets().top;
     }
 }

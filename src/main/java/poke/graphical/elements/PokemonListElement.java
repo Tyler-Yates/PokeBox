@@ -1,6 +1,5 @@
 package poke.graphical.elements;
 
-import javafx.scene.input.MouseButton;
 import org.apache.commons.lang.StringUtils;
 import poke.data.Pokemon;
 import poke.data.Species;
@@ -47,7 +46,7 @@ public class PokemonListElement extends AbstractElement {
     }
 
     @Override
-    public void handleClick(int x, int y, MouseButton mouseButton) {
+    public void handleClick(int x, int y, int mouseButton) {
 
     }
 
@@ -97,7 +96,7 @@ class PokemonElement extends AbstractElement {
     }
 
     @Override
-    public void handleClick(int x, int y, MouseButton mouseButton) {
+    public void handleClick(int x, int y, int mouseButton) {
 
     }
 

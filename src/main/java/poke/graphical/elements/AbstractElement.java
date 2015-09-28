@@ -1,6 +1,5 @@
 package poke.graphical.elements;
 
-import javafx.scene.input.MouseButton;
 import poke.graphical.GraphicalInterface;
 
 import javax.swing.JFrame;
@@ -13,7 +12,7 @@ public abstract class AbstractElement {
         this.graphicalInterface = graphicalInterface;
     }
 
-    public abstract void handleClick(int x, int y, MouseButton mouseButton);
+    public abstract void handleClick(int x, int y, int mouseButton);
 
     public abstract void handleHover(int x, int y);
 

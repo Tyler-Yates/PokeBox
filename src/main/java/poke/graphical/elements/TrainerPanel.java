@@ -1,6 +1,5 @@
 package poke.graphical.elements;
 
-import javafx.scene.input.MouseButton;
 import poke.data.Trainer;
 import poke.graphical.GraphicalInterface;
 
@@ -38,7 +37,7 @@ public class TrainerPanel extends AbstractElement {
     }
 
     @Override
-    public void handleClick(int x, int y, MouseButton mouseButton) {
+    public void handleClick(int x, int y, int mouseButton) {
 
     }
 
@@ -88,7 +87,7 @@ class BadgeImage extends AbstractElement {
     }
 
     @Override
-    public void handleClick(int x, int y, MouseButton mouseButton) {
+    public void handleClick(int x, int y, int mouseButton) {
 
     }
 
