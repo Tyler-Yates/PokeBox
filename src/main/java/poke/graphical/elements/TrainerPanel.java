@@ -1,6 +1,7 @@
 package poke.graphical.elements;
 
 import poke.data.Badges;
+import poke.data.SaveFile;
 import poke.data.Trainer;
 import poke.graphical.GraphicalInterface;
 import poke.util.ImageLoader;
@@ -95,13 +96,20 @@ class BadgeImage extends Element {
 
     @Override
     public void handleHover(int x, int y) {
-        if (rectangle != null && rectangle.contains(x, y)) {
+        if (isVisible() && rectangle != null && rectangle.contains(x, y)) {
             graphicalInterface.setTooltipElement(x, y, Badges.getBadgeName(index) + " Badge");
         }
     }
 
     @Override
     public void draw(Graphics g, JFrame frame) {
-        g.drawImage(bufferedImage, x, y, frame);
+        if (isVisible()) {
+            g.drawImage(bufferedImage, x, y, frame);
+        }
+    }
+
+    private boolean isVisible() {
+        final SaveFile saveFile = graphicalInterface.getSaveFile();
+        return saveFile != null && saveFile.getTrainer().getBadges().hasBadge(index);
     }
 }
