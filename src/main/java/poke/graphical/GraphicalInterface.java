@@ -3,6 +3,7 @@ package poke.graphical;
 import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
 import poke.graphical.elements.AbstractElement;
+import poke.graphical.elements.PokemonListElement;
 import poke.graphical.elements.TrainerPanel;
 
 import javax.swing.JFileChooser;
@@ -46,13 +47,16 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         final GraphicalInterface graphicalInterface = new GraphicalInterface();
         graphicalInterface.initButtons();
         if (args.length == 1) {
-            graphicalInterface.saveFile = SaveFileReader.readSaveFile(new File(args[0]));
-            graphicalInterface.repaint();
+            graphicalInterface.loadSaveFile(new File(args[0]));
         }
     }
 
     private void initButtons() {
+        elements.clear();
         elements.add(new TrainerPanel(this));
+        if (saveFile != null) {
+            elements.add(new PokemonListElement(this, saveFile.getPartyPokemon(), "Party"));
+        }
     }
 
     public SaveFile getSaveFile() {
@@ -113,11 +117,7 @@ public class GraphicalInterface extends JPanel implements KeyListener {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 try {
-                    System.out.print("Loading save file...");
-                    saveFile = SaveFileReader.readSaveFile(fileChooser.getSelectedFile());
-                    System.out.println("Done!\n");
-                    System.out.println(saveFile.toString());
-                    repaint();
+                    loadSaveFile(fileChooser.getSelectedFile());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -125,5 +125,14 @@ public class GraphicalInterface extends JPanel implements KeyListener {
                 System.out.println("Failed!\nAborted opening file");
             }
         }
+    }
+
+    private void loadSaveFile(File file) throws IOException {
+        System.out.print("Loading save file...");
+        saveFile = SaveFileReader.readSaveFile(file);
+        System.out.println("Done!\n");
+        System.out.println(saveFile.toString());
+        initButtons();
+        repaint();
     }
 }
