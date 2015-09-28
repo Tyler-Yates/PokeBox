@@ -2,6 +2,7 @@ package poke.util;
 
 import org.apache.commons.lang.StringUtils;
 import poke.data.Pokemon;
+import poke.data.StatusCondition;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -53,5 +54,29 @@ public class ImageLoader {
     public static BufferedImage loadImageForBadge(int index) {
         final String imageName = "badges/" + index + ".png";
         return loadImage(imageName);
+    }
+
+    public static BufferedImage loadImageForStatusCondition(StatusCondition statusCondition) {
+        final StringBuilder imageName = new StringBuilder("status/");
+        switch (statusCondition) {
+            case BURNED:
+                imageName.append("burn");
+                break;
+            case FROZEN:
+                imageName.append("frozen");
+                break;
+            case PARALYZED:
+                imageName.append("paralyzed");
+                break;
+            case POISONED:
+                imageName.append("poisoned");
+                break;
+            case ASLEEP:
+                imageName.append("sleep");
+                break;
+            default:
+                return null;
+        }
+        return loadImage(imageName.append(".png").toString());
     }
 }

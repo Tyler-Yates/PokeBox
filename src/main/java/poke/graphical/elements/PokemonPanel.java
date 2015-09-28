@@ -20,18 +20,6 @@ public class PokemonPanel extends Element {
         super(graphicalInterface);
     }
 
-    private static void drawHealthBar(Graphics g, int x, int y, int currentHp, int maxHp) {
-        final int bottom = y + 4;
-        final int width = 100;
-        g.drawLine(x, y, x, bottom);
-        g.drawLine(x, bottom, x + width, bottom);
-        g.drawLine(x + width, bottom, x + width, y);
-        final int maxWidth = width - 3;
-        final double percent = Math.min(1.0, 1.0 * currentHp / maxHp);
-        g.setColor(getHpColor(currentHp, maxHp));
-        g.fillRect(x + 2, y, (int) (maxWidth * percent), 3);
-    }
-
     private static Color getHpColor(int currentHp, int maxHp) {
         double percent = 1.0 * currentHp / maxHp;
         if (percent <= 0.33) {
@@ -76,7 +64,7 @@ public class PokemonPanel extends Element {
         y += 20;
         g.drawString("XP: " + formatNumber(pokemon.getXp()), textX, y);
         y += 20;
-        drawHealthBar(g, textX, y, pokemon.getCurrentHp(), pokemon.getMaxHp());
+        drawHealthBarAndStatusCondition(g, textX, y, pokemon, frame);
         y += 20;
         g.drawString("HP: " + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp(), textX, y);
         y += 30;
@@ -92,5 +80,23 @@ public class PokemonPanel extends Element {
         g.drawString("Original Trainer: " + pokemon.getOriginalTrainerName(), textX, y);
         y += 20;
         g.drawString("Original Trainer ID: " + pokemon.getOriginalTrainerId(), textX, y);
+    }
+
+    private void drawHealthBarAndStatusCondition(Graphics g, int x, int y, Pokemon pokemon, JFrame frame) {
+        final int bottom = y + 4;
+        final int width = 100;
+        g.drawLine(x, y, x, bottom);
+        g.drawLine(x, bottom, x + width, bottom);
+        g.drawLine(x + width, bottom, x + width, y);
+        final int maxWidth = width - 3;
+        final double percent = Math.min(1.0, 1.0 * pokemon.getCurrentHp() / pokemon.getMaxHp());
+        g.setColor(getHpColor(pokemon.getCurrentHp(), pokemon.getMaxHp()));
+        g.fillRect(x + 2, y, (int) (maxWidth * percent), 3);
+
+        final BufferedImage statusConditionImage = ImageLoader.loadImageForStatusCondition(
+                pokemon.getStatusCondition());
+        if (statusConditionImage != null) {
+            g.drawImage(statusConditionImage, x + maxWidth - statusConditionImage.getWidth(), bottom + 6, frame);
+        }
     }
 }
