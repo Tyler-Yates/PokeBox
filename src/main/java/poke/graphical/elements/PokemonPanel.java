@@ -79,5 +79,18 @@ public class PokemonPanel extends Element {
         drawHealthBar(g, textX, y, pokemon.getCurrentHp(), pokemon.getMaxHp());
         y += 20;
         g.drawString("HP: " + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp(), textX, y);
+        y += 30;
+        g.setColor(Color.WHITE);
+        g.drawString("Attack: " + pokemon.getAttack(), textX, y);
+        y += 20;
+        g.drawString("Defense: " + pokemon.getDefense(), textX, y);
+        y += 20;
+        g.drawString("Speed: " + pokemon.getSpeed(), textX, y);
+        y += 20;
+        g.drawString("Special: " + pokemon.getSpecial(), textX, y);
+        y += 40;
+        g.drawString("Original Trainer: " + pokemon.getOriginalTrainerName(), textX, y);
+        y += 20;
+        g.drawString("Original Trainer ID: " + pokemon.getOriginalTrainerId(), textX, y);
     }
 }
