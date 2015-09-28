@@ -109,6 +109,10 @@ public class MediumSlow extends XpType {
         xpNeededPerLevel.put(100, 1059860);
     }
 
+    MediumSlow() {
+
+    }
+
     @Override
     Map<Integer, Integer> getXpNeededPerLevel() {
         return xpNeededPerLevel;

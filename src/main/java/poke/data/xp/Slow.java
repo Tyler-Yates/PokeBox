@@ -109,6 +109,10 @@ public class Slow extends XpType {
         xpNeededPerLevel.put(100, 800000);
     }
 
+    Slow() {
+
+    }
+
     @Override
     Map<Integer, Integer> getXpNeededPerLevel() {
         return xpNeededPerLevel;

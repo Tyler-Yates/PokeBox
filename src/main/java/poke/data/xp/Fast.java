@@ -110,6 +110,10 @@ public class Fast extends XpType {
         xpNeededPerLevel.put(100, 800000);
     }
 
+    Fast() {
+
+    }
+
     @Override
     Map<Integer, Integer> getXpNeededPerLevel() {
         return xpNeededPerLevel;
