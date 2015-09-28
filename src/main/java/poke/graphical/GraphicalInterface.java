@@ -61,7 +61,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         frame.add(this);
     }
 
-    void initButtons() {
+    void initElements() {
         elements.clear();
         elements.add(new SaveFileLocationElement(this));
         elements.add(new TrainerPanel(this));
@@ -192,7 +192,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         saveFile = SaveFileReader.readSaveFile(file);
         System.out.println("Done!\n");
         System.out.println(saveFile.toString());
-        initButtons();
+        initElements();
         repaint();
     }
 

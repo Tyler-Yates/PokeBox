@@ -8,7 +8,7 @@ public class PokeBox {
 
     public static void main(String[] args) throws IOException {
         graphicalInterface = new GraphicalInterface();
-        graphicalInterface.initButtons();
+        graphicalInterface.initElements();
         if (args.length == 1) {
             graphicalInterface.loadSaveFile(new File(args[0]));
         }
