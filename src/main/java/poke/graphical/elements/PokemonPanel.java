@@ -97,6 +97,11 @@ public class PokemonPanel extends Element {
         y += drawMove(g, textX, y, 4, pokemon.getMove4(), pokemon.getCurrentMove4pp(), pokemon.getMove4ppUps());
     }
 
+    @Override
+    public boolean isVisible() {
+        return true;
+    }
+
     private int drawMove(Graphics g, int x, int y, int index, Move move, int currentPp, int ppUps) {
         final String moveName = Move.getMoveName(move);
         if (moveName.equals(Move.getMoveName(Move.Struggle))) {

@@ -46,4 +46,9 @@ public class SaveFileLocationElement extends Element {
             g.drawLine(0, height, frame.getWidth(), height);
         }
     }
+
+    @Override
+    public boolean isVisible() {
+        return true;
+    }
 }

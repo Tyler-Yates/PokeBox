@@ -17,4 +17,6 @@ public abstract class Element {
     public abstract void handleHover(int x, int y);
 
     public abstract void draw(Graphics g, JFrame frame);
+
+    public abstract boolean isVisible();
 }

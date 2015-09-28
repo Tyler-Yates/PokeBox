@@ -45,7 +45,9 @@ public class TrainerPanel extends Element {
     @Override
     public void handleHover(int x, int y) {
         for (final BadgeImage badgeImage : badgeImages) {
-            badgeImage.handleHover(x, y);
+            if (badgeImage.isVisible()) {
+                badgeImage.handleHover(x, y);
+            }
         }
     }
 
@@ -64,8 +66,15 @@ public class TrainerPanel extends Element {
         g.drawString("Rival: " + trainer.getRivalName(), 10, top + 160);
 
         for (final BadgeImage badgeImage : badgeImages) {
-            badgeImage.draw(g, frame);
+            if (badgeImage.isVisible()) {
+                badgeImage.draw(g, frame);
+            }
         }
+    }
+
+    @Override
+    public boolean isVisible() {
+        return true;
     }
 }
 
@@ -96,19 +105,18 @@ class BadgeImage extends Element {
 
     @Override
     public void handleHover(int x, int y) {
-        if (isVisible() && rectangle != null && rectangle.contains(x, y)) {
+        if (rectangle != null && rectangle.contains(x, y)) {
             graphicalInterface.setTooltipElement(x, y, Badges.getBadgeName(index) + " Badge");
         }
     }
 
     @Override
     public void draw(Graphics g, JFrame frame) {
-        if (isVisible()) {
-            g.drawImage(bufferedImage, x, y, frame);
-        }
+        g.drawImage(bufferedImage, x, y, frame);
     }
 
-    private boolean isVisible() {
+    @Override
+    public boolean isVisible() {
         final SaveFile saveFile = graphicalInterface.getSaveFile();
         return saveFile != null && saveFile.getTrainer().getBadges().hasBadge(index);
     }

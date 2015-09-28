@@ -117,7 +117,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             // Use indexed for loop to avoid ConcurrentModificationException if a save is loaded
             for (int i = 0; i < elements.size(); i++) {
                 Element element = elements.get(i);
-                element.draw(g, frame);
+                if (element.isVisible()) {
+                    element.draw(g, frame);
+                }
             }
             if (tooltipElement != null) {
                 tooltipElement.draw(g);
@@ -165,7 +167,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         currentPokemonList += amount;
         setCurrentPokemon(null);
         for (final Element element : elements) {
-            element.handleHover(mouseX, mouseY);
+            if (element.isVisible()) {
+                element.handleHover(mouseX, mouseY);
+            }
         }
         repaint();
     }
@@ -207,7 +211,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         // Use indexed for loop to avoid ConcurrentModificationException if an element triggers a save reload
         for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
-            element.handleClick(getX(e), getY(e), e.getButton());
+            if (element.isVisible()) {
+                element.handleClick(getX(e), getY(e), e.getButton());
+            }
         }
     }
 
@@ -217,7 +223,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         // Use indexed for loop to avoid ConcurrentModificationException if an element triggers a save reload
         for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
-            element.handleClick(getX(e), getY(e), e.getButton());
+            if (element.isVisible()) {
+                element.handleClick(getX(e), getY(e), e.getButton());
+            }
         }
     }
 
@@ -243,7 +251,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         final Pokemon originalPokemon = getCurrentPokemon();
         setCurrentPokemon(null);
         for (final Element element : elements) {
-            element.handleHover(getX(e), getY(e));
+            if (element.isVisible()) {
+                element.handleHover(getX(e), getY(e));
+            }
         }
 
         if (originalPokemon != getCurrentPokemon() || originalTooltip != tooltipElement) {

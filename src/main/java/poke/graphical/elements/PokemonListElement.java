@@ -54,42 +54,37 @@ public class PokemonListElement extends Element {
 
     @Override
     public void handleClick(int x, int y, int mouseButton) {
-        if (!isVisible()) {
-            return;
-        }
-
         for (final PokemonElement pokemonElement : pokemonElements) {
-            pokemonElement.handleClick(x, y, mouseButton);
+            if (pokemonElement.isVisible()) {
+                pokemonElement.handleClick(x, y, mouseButton);
+            }
         }
     }
 
     @Override
     public void handleHover(int x, int y) {
-        if (!isVisible()) {
-            return;
-        }
-
         for (final PokemonElement pokemonElement : pokemonElements) {
-            pokemonElement.handleHover(x, y);
+            if (pokemonElement.isVisible()) {
+                pokemonElement.handleHover(x, y);
+            }
         }
     }
 
     @Override
     public void draw(Graphics g, JFrame frame) {
-        if (!isVisible()) {
-            return;
-        }
-
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 32));
         g.drawString(name, left, top);
 
         for (final PokemonElement pokemonElement : pokemonElements) {
-            pokemonElement.draw(g, frame);
+            if (pokemonElement.isVisible()) {
+                pokemonElement.draw(g, frame);
+            }
         }
     }
 
-    private boolean isVisible() {
+    @Override
+    public boolean isVisible() {
         return name.equals(graphicalInterface.getCurrentPokemonList());
     }
 }
@@ -140,6 +135,11 @@ class PokemonElement extends Element {
             }
         }
     }
+
+    @Override
+    public boolean isVisible() {
+        return true;
+    }
 }
 
 class EmptyPokemonElement extends PokemonElement {
@@ -175,5 +175,10 @@ class EmptyPokemonElement extends PokemonElement {
             g.setColor(Color.LIGHT_GRAY);
         }
         g.drawRect(x, y, baseImage.getWidth(), baseImage.getHeight());
+    }
+
+    @Override
+    public boolean isVisible() {
+        return true;
     }
 }
