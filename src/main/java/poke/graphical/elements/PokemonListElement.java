@@ -58,6 +58,10 @@ public class PokemonListElement extends AbstractElement {
 
     @Override
     public void draw(Graphics g, JFrame frame) {
+        if (!name.equals(graphicalInterface.getCurrentPokemonList())) {
+            return;
+        }
+
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 32));
         g.drawString(name, left, top);
@@ -104,7 +108,6 @@ class PokemonElement extends AbstractElement {
 
     @Override
     public void draw(Graphics g, JFrame frame) {
-        System.out.println("drawing image");
         g.drawImage(bufferedImage, x, y, frame);
     }
 }

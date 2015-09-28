@@ -1,5 +1,6 @@
 package poke.graphical;
 
+import poke.data.Pokemon;
 import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
 import poke.graphical.elements.AbstractElement;
@@ -21,13 +22,18 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GraphicalInterface extends JPanel implements KeyListener {
     private static final double VERSION = 0.1;
     public static JFrame frame;
     private final List<AbstractElement> elements = new ArrayList<>();
     private SaveFile saveFile = null;
+
+    private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
+    private int currentPokemonList = 0;
 
     /**
      * Initializes the JFrame
@@ -55,12 +61,25 @@ public class GraphicalInterface extends JPanel implements KeyListener {
         elements.clear();
         elements.add(new TrainerPanel(this));
         if (saveFile != null) {
-            elements.add(new PokemonListElement(this, saveFile.getPartyPokemon(), "Party"));
+            pokemonListIndexToName.clear();
+            addNewPokemonList(saveFile.getPartyPokemon(), "Party");
+            for (int i = 0; i < saveFile.getBoxes().size(); i++) {
+                addNewPokemonList(saveFile.getBoxes().get(i), "Box " + (i + 1));
+            }
         }
+    }
+
+    private void addNewPokemonList(List<Pokemon> pokemonList, String name) {
+        elements.add(new PokemonListElement(this, pokemonList, name));
+        pokemonListIndexToName.put(pokemonListIndexToName.size(), name);
     }
 
     public SaveFile getSaveFile() {
         return saveFile;
+    }
+
+    public String getCurrentPokemonList() {
+        return pokemonListIndexToName.get(currentPokemonList);
     }
 
     @Override
@@ -124,6 +143,12 @@ public class GraphicalInterface extends JPanel implements KeyListener {
             } else {
                 System.out.println("Failed!\nAborted opening file");
             }
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentPokemonList > 0) {
+            currentPokemonList--;
+            repaint();
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentPokemonList < 12) {
+            currentPokemonList++;
+            repaint();
         }
     }
 
