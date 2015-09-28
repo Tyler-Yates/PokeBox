@@ -2,15 +2,12 @@ package poke.graphical.elements;
 
 import poke.data.Trainer;
 import poke.graphical.GraphicalInterface;
+import poke.util.ImageLoader;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,13 +75,7 @@ class BadgeImage extends AbstractElement {
 
         this.x = x;
         this.y = y;
-        final ClassLoader classLoader = BadgeImage.class.getClassLoader();
-        final URL resource = classLoader.getResource("images/badges/" + index + ".png");
-        try {
-            bufferedImage = ImageIO.read(new File(resource.getFile()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        bufferedImage = ImageLoader.loadImageForBadge(index);
     }
 
     @Override

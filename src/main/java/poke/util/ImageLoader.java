@@ -30,7 +30,7 @@ public class ImageLoader {
         }
 
         final ClassLoader classLoader = ImageLoader.class.getClassLoader();
-        final URL resource = classLoader.getResource(name);
+        final URL resource = classLoader.getResource("images/" + name);
         if (resource == null) {
             return null;
         }
@@ -47,6 +47,11 @@ public class ImageLoader {
     public static BufferedImage getImageForPokemon(Pokemon pokemon) {
         final int pokeIndex = PokedexIndex.getPokedexIndex(pokemon.getSpecies());
         final String imageName = StringUtils.leftPad(Integer.toString(pokeIndex), 3, "0");
-        return loadImage("images/pokemon/" + imageName + ".png");
+        return loadImage("pokemon/" + imageName + ".png");
+    }
+
+    public static BufferedImage loadImageForBadge(int index) {
+        final String imageName = "badges/" + index + ".png";
+        return loadImage(imageName);
     }
 }
