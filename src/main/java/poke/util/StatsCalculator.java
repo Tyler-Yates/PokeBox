@@ -52,7 +52,6 @@ public class StatsCalculator {
     }
 
     private static int calculateNonHpStat(int base, int iv, int ev, int level) {
-        final int numerator = ((base + iv) * 2 + calculateEvPart(ev)) * level;
         return calculateFirstPart(base, iv, ev, level) + 5;
     }
 

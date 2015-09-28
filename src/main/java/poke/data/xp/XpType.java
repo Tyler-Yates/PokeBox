@@ -1,6 +1,18 @@
 package poke.data.xp;
 
-public interface XpType {
+import java.util.Map;
 
-    int getLevel(int xp);
+public abstract class XpType {
+    public int getLevel(int xp) {
+        final Map<Integer, Integer> xpNeededPerLevel = getXpNeededPerLevel();
+        for (int level = 2; level <= 101; level++) {
+            final int neededXp = xpNeededPerLevel.get(level);
+            if (xp < neededXp) {
+                return level - 1;
+            }
+        }
+        return 0;
+    }
+
+    abstract Map<Integer, Integer> getXpNeededPerLevel();
 }
