@@ -40,6 +40,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     private int currentPokemonList = 0;
     private Pokemon currentPokemon = null;
 
+    private int mouseX;
+    private int mouseY;
+
     /**
      * Initializes the JFrame
      */
@@ -150,12 +153,19 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
                 System.out.println("Failed!\nAborted opening file");
             }
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentPokemonList > 0) {
-            currentPokemonList--;
-            repaint();
+            changePokemonList(-1);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentPokemonList < 12) {
-            currentPokemonList++;
-            repaint();
+            changePokemonList(1);
         }
+    }
+
+    void changePokemonList(int amount) {
+        currentPokemonList += amount;
+        setCurrentPokemon(null);
+        for (final AbstractElement abstractElement : elements) {
+            abstractElement.handleHover(mouseX, mouseY);
+        }
+        repaint();
     }
 
     void loadSaveFile(File file) throws IOException {
@@ -215,10 +225,12 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     }
 
     private int getX(MouseEvent e) {
-        return e.getX() - frame.getInsets().left;
+        mouseX = e.getX() - frame.getInsets().left;
+        return mouseX;
     }
 
     private int getY(MouseEvent e) {
-        return e.getY() - frame.getInsets().top;
+        mouseY = e.getY() - frame.getInsets().top;
+        return mouseY;
     }
 }
