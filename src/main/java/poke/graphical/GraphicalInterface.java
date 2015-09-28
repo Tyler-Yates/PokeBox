@@ -7,6 +7,7 @@ import poke.decode.SaveFileReader;
 import poke.graphical.elements.Element;
 import poke.graphical.elements.PokemonListElement;
 import poke.graphical.elements.PokemonPanel;
+import poke.graphical.elements.TooltipElement;
 import poke.graphical.elements.TrainerPanel;
 
 import javax.swing.JFileChooser;
@@ -40,6 +41,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
     private int currentPokemonList = 0;
     private Pokemon currentPokemon = null;
+    private TooltipElement tooltipElement = null;
 
     private int mouseX;
     private int mouseY;
@@ -92,6 +94,10 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         this.currentPokemon = pokemon;
     }
 
+    public void setTooltipElement(int x, int y, String text) {
+        this.tooltipElement = new TooltipElement(x, y, text);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -107,6 +113,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
             for (final Element element : elements) {
                 element.draw(g, frame);
+            }
+            if (tooltipElement != null) {
+                tooltipElement.draw(g, frame);
             }
         }
     }
@@ -214,13 +223,15 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        final Pokemon original = getCurrentPokemon();
+        final TooltipElement originalTooltip = tooltipElement;
+        tooltipElement = null;
+        final Pokemon originalPokemon = getCurrentPokemon();
         setCurrentPokemon(null);
         for (final Element element : elements) {
             element.handleHover(getX(e), getY(e));
         }
 
-        if (original != getCurrentPokemon()) {
+        if (originalPokemon != getCurrentPokemon() || originalTooltip != tooltipElement) {
             repaint();
         }
     }

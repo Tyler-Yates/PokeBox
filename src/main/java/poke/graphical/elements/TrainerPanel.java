@@ -1,5 +1,6 @@
 package poke.graphical.elements;
 
+import poke.data.Badges;
 import poke.data.Trainer;
 import poke.graphical.GraphicalInterface;
 import poke.util.ImageLoader;
@@ -7,6 +8,7 @@ import poke.util.ImageLoader;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,9 @@ public class TrainerPanel extends Element {
 
     @Override
     public void handleHover(int x, int y) {
-
+        for (final BadgeImage badgeImage : badgeImages) {
+            badgeImage.handleHover(x, y);
+        }
     }
 
     @Override
@@ -67,15 +71,21 @@ public class TrainerPanel extends Element {
 class BadgeImage extends Element {
     private final int x;
     private final int y;
+    private final int index;
 
     private BufferedImage bufferedImage;
+    private Rectangle rectangle;
 
     public BadgeImage(GraphicalInterface graphicalInterface, int index, int x, int y) {
         super(graphicalInterface);
-
         this.x = x;
         this.y = y;
+        this.index = index;
+
         bufferedImage = ImageLoader.loadImageForBadge(index);
+        if (bufferedImage != null) {
+            rectangle = new Rectangle(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
+        }
     }
 
     @Override
@@ -85,7 +95,9 @@ class BadgeImage extends Element {
 
     @Override
     public void handleHover(int x, int y) {
-
+        if (rectangle != null && rectangle.contains(x, y)) {
+            graphicalInterface.setTooltipElement(x, y, Badges.getBadgeName(index) + " Badge");
+        }
     }
 
     @Override

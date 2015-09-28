@@ -25,6 +25,13 @@ public class Badges {
         toString = stringBuilder.toString();
     }
 
+    public static String getBadgeName(int index) {
+        if (index < 0 || index >= badgeNames.length) {
+            return "";
+        }
+        return badgeNames[index];
+    }
+
     public String toString() {
         return toString;
     }
