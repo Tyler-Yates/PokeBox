@@ -91,19 +91,19 @@ public class PokemonPanel extends Element {
         y += 20;
         g.drawString("Original Trainer ID: " + pokemon.getOriginalTrainerId(), textX, y);
         y += 40;
-        y += drawMove(g, textX, y, 1, pokemon.getMove1(), pokemon.getCurrentMove1pp());
-        y += drawMove(g, textX, y, 2, pokemon.getMove2(), pokemon.getCurrentMove2pp());
-        y += drawMove(g, textX, y, 3, pokemon.getMove3(), pokemon.getCurrentMove3pp());
-        y += drawMove(g, textX, y, 4, pokemon.getMove4(), pokemon.getCurrentMove4pp());
+        y += drawMove(g, textX, y, 1, pokemon.getMove1(), pokemon.getCurrentMove1pp(), pokemon.getMove1ppUps());
+        y += drawMove(g, textX, y, 2, pokemon.getMove2(), pokemon.getCurrentMove2pp(), pokemon.getMove2ppUps());
+        y += drawMove(g, textX, y, 3, pokemon.getMove3(), pokemon.getCurrentMove3pp(), pokemon.getMove3ppUps());
+        y += drawMove(g, textX, y, 4, pokemon.getMove4(), pokemon.getCurrentMove4pp(), pokemon.getMove4ppUps());
     }
 
-    private int drawMove(Graphics g, int x, int y, int index, Move move, int currentPp) {
+    private int drawMove(Graphics g, int x, int y, int index, Move move, int currentPp, int ppUps) {
         final String moveName = Move.getMoveName(move);
         if (moveName.equals(Move.getMoveName(Move.Struggle))) {
             return 0;
         }
         g.drawString("Move " + index + ": " + Move.getMoveName(move), x, y);
-        g.drawString("    PP: " + currentPp, x, y + 20);
+        g.drawString("    PP: " + currentPp + "/" + (Move.getBasePp(move) + ppUps * 3), x, y + 20);
         return 50;
     }
 

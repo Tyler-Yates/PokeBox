@@ -23,6 +23,7 @@ public enum Move {
 
     private static final Map<Integer, Move> index = new HashMap<>();
     private static final Map<Move, String> names = new HashMap<>();
+    private static final Map<Move, Integer> basePp = new HashMap<>();
 
     static {
         index.put(1, Pound);
@@ -358,6 +359,174 @@ public enum Move {
         names.put(Struggle, "Struggle");
     }
 
+    static {
+        basePp.put(Pound, 35);
+        basePp.put(KarateChop, 25);
+        basePp.put(DoubleSlap, 10);
+        basePp.put(CometPunch, 15);
+        basePp.put(MegaPunch, 20);
+        basePp.put(PayDay, 20);
+        basePp.put(FirePunch, 15);
+        basePp.put(IcePunch, 15);
+        basePp.put(ThunderPunch, 15);
+        basePp.put(Scratch, 35);
+        basePp.put(ViceGrip, 30);
+        basePp.put(Guillotine, 5);
+        basePp.put(RazorWind, 10);
+        basePp.put(SwordsDance, 20);
+        basePp.put(Cut, 30);
+        basePp.put(Gust, 35);
+        basePp.put(WingAttack, 35);
+        basePp.put(Whirlwind, 20);
+        basePp.put(Fly, 15);
+        basePp.put(Bind, 20);
+        basePp.put(Slam, 20);
+        basePp.put(VineWhip, 25);
+        basePp.put(Stomp, 20);
+        basePp.put(DoubleKick, 30);
+        basePp.put(MegaKick, 5);
+        basePp.put(JumpKick, 10);
+        basePp.put(RollingKick, 15);
+        basePp.put(SandAttack, 15);
+        basePp.put(Headbutt, 15);
+        basePp.put(HornAttack, 25);
+        basePp.put(FuryAttack, 20);
+        basePp.put(HornDrill, 5);
+        basePp.put(Tackle, 35);
+        basePp.put(BodySlam, 15);
+        basePp.put(Wrap, 20);
+        basePp.put(TakeDown, 20);
+        basePp.put(Thrash, 10);
+        basePp.put(DoubleEdge, 15);
+        basePp.put(TailWhip, 30);
+        basePp.put(PoisonSting, 35);
+        basePp.put(Twineedle, 20);
+        basePp.put(PinMissile, 20);
+        basePp.put(Leer, 30);
+        basePp.put(Bite, 25);
+        basePp.put(Growl, 40);
+        basePp.put(Roar, 20);
+        basePp.put(Sing, 15);
+        basePp.put(Supersonic, 20);
+        basePp.put(SonicBoom, 20);
+        basePp.put(Disable, 20);
+        basePp.put(Acid, 30);
+        basePp.put(Ember, 25);
+        basePp.put(Flamethrower, 15);
+        basePp.put(Mist, 30);
+        basePp.put(WaterGun, 25);
+        basePp.put(HydroPump, 5);
+        basePp.put(Surf, 15);
+        basePp.put(IceBeam, 10);
+        basePp.put(Blizzard, 5);
+        basePp.put(Psybeam, 20);
+        basePp.put(BubbleBeam, 20);
+        basePp.put(AuroraBeam, 20);
+        basePp.put(HyperBeam, 5);
+        basePp.put(Peck, 35);
+        basePp.put(DrillPeck, 20);
+        basePp.put(Submission, 25);
+        basePp.put(LowKick, 20);
+        basePp.put(Counter, 20);
+        basePp.put(SeismicToss, 20);
+        basePp.put(Strength, 15);
+        basePp.put(Absorb, 25);
+        basePp.put(MegaDrain, 15);
+        basePp.put(LeechSeed, 10);
+        basePp.put(Growth, 20);
+        basePp.put(RazorLeaf, 25);
+        basePp.put(SolarBeam, 10);
+        basePp.put(PoisonPowder, 35);
+        basePp.put(StunSpore, 30);
+        basePp.put(SleepPowder, 15);
+        basePp.put(PetalDance, 10);
+        basePp.put(StringShot, 40);
+        basePp.put(DragonRage, 10);
+        basePp.put(FireSpin, 15);
+        basePp.put(ThunderShock, 30);
+        basePp.put(Thunderbolt, 15);
+        basePp.put(ThunderWave, 20);
+        basePp.put(Thunder, 10);
+        basePp.put(RockThrow, 15);
+        basePp.put(Earthquake, 10);
+        basePp.put(Fissure, 5);
+        basePp.put(Dig, 10);
+        basePp.put(Toxic, 10);
+        basePp.put(Confusion, 25);
+        basePp.put(Psychic, 10);
+        basePp.put(Hypnosis, 20);
+        basePp.put(Meditate, 40);
+        basePp.put(Agility, 30);
+        basePp.put(QuickAttack, 30);
+        basePp.put(Rage, 20);
+        basePp.put(Teleport, 20);
+        basePp.put(NightShade, 15);
+        basePp.put(Mimic, 10);
+        basePp.put(Screech, 40);
+        basePp.put(DoubleTeam, 15);
+        basePp.put(Recover, 10);
+        basePp.put(Harden, 30);
+        basePp.put(Minimize, 10);
+        basePp.put(Smokescreen, 20);
+        basePp.put(ConfuseRay, 10);
+        basePp.put(Withdraw, 40);
+        basePp.put(DefenseCurl, 40);
+        basePp.put(Barrier, 20);
+        basePp.put(LightScreen, 30);
+        basePp.put(Haze, 30);
+        basePp.put(Reflect, 20);
+        basePp.put(FocusEnergy, 30);
+        basePp.put(Bide, 10);
+        basePp.put(Metronome, 10);
+        basePp.put(MirrorMove, 20);
+        basePp.put(SelfDestruct, 5);
+        basePp.put(EggBomb, 10);
+        basePp.put(Lick, 30);
+        basePp.put(Smog, 20);
+        basePp.put(Sludge, 20);
+        basePp.put(BoneClub, 20);
+        basePp.put(FireBlast, 5);
+        basePp.put(Waterfall, 15);
+        basePp.put(Clamp, 10);
+        basePp.put(Swift, 20);
+        basePp.put(SkullBash, 10);
+        basePp.put(SpikeCannon, 15);
+        basePp.put(Constrict, 35);
+        basePp.put(Amnesia, 20);
+        basePp.put(Kinesis, 15);
+        basePp.put(SoftBoiled, 10);
+        basePp.put(HighJumpKick, 10);
+        basePp.put(Glare, 30);
+        basePp.put(DreamEater, 15);
+        basePp.put(PoisonGas, 40);
+        basePp.put(Barrage, 20);
+        basePp.put(LeechLife, 15);
+        basePp.put(LovelyKiss, 10);
+        basePp.put(SkyAttack, 5);
+        basePp.put(Transform, 10);
+        basePp.put(Bubble, 30);
+        basePp.put(DizzyPunch, 10);
+        basePp.put(Spore, 15);
+        basePp.put(Flash, 20);
+        basePp.put(Psywave, 15);
+        basePp.put(Splash, 40);
+        basePp.put(AcidArmor, 20);
+        basePp.put(Crabhammer, 10);
+        basePp.put(Explosion, 5);
+        basePp.put(FurySwipes, 15);
+        basePp.put(Bonemerang, 10);
+        basePp.put(Rest, 10);
+        basePp.put(RockSlide, 10);
+        basePp.put(HyperFang, 15);
+        basePp.put(Sharpen, 30);
+        basePp.put(Conversion, 30);
+        basePp.put(TriAttack, 10);
+        basePp.put(SuperFang, 10);
+        basePp.put(Slash, 20);
+        basePp.put(Substitute, 10);
+        basePp.put(Struggle, 1);
+    }
+
     public static Move getMove(int b) {
         final Move move = index.get(b);
         if (move == null) {
@@ -372,5 +541,13 @@ public enum Move {
             return "UNKNOWN";
         }
         return name;
+    }
+
+    public static int getBasePp(Move move) {
+        final Integer pp = basePp.get(move);
+        if (pp == null) {
+            return -1;
+        }
+        return pp;
     }
 }
