@@ -104,6 +104,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         return frame;
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -113,7 +114,9 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
             g.setFont(new Font("Arial", Font.BOLD, 16));
             drawStringCentered("Press 'L' to load a save file", g);
         } else {
-            for (final Element element : elements) {
+            // Use indexed for loop to avoid ConcurrentModificationException if a save is loaded
+            for (int i = 0; i < elements.size(); i++) {
+                Element element = elements.get(i);
                 element.draw(g, frame);
             }
             if (tooltipElement != null) {
@@ -198,16 +201,22 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     @Override
     public void mousePressed(MouseEvent e) {
-        for (final Element element : elements) {
+        // Use indexed for loop to avoid ConcurrentModificationException if an element triggers a save reload
+        for (int i = 0; i < elements.size(); i++) {
+            Element element = elements.get(i);
             element.handleClick(getX(e), getY(e), e.getButton());
         }
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     @Override
     public void mouseReleased(MouseEvent e) {
-        for (final Element element : elements) {
+        // Use indexed for loop to avoid ConcurrentModificationException if an element triggers a save reload
+        for (int i = 0; i < elements.size(); i++) {
+            Element element = elements.get(i);
             element.handleClick(getX(e), getY(e), e.getButton());
         }
     }
