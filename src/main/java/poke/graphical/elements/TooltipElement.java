@@ -1,6 +1,5 @@
 package poke.graphical.elements;
 
-import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -16,7 +15,7 @@ public class TooltipElement {
         this.text = text;
     }
 
-    public void draw(Graphics g, JFrame frame) {
+    public void draw(Graphics g) {
         g.setColor(new Color(255, 229, 154));
         g.setFont(new Font("Arial", Font.PLAIN, 12));
         final int width = g.getFontMetrics().stringWidth(text) + 10;
