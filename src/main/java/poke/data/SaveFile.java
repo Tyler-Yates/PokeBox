@@ -1,24 +1,27 @@
 package poke.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaveFile {
     private final String fileLocation;
     private final Trainer trainer;
-    private final List<Pokemon> partyPokemon;
-    private final List<List<Pokemon>> boxes;
+    private final PokemonList partyPokemon;
+    private final List<PokemonList> boxes = new ArrayList<>();
 
     public SaveFile(String fileLocation, Trainer trainer, List<Pokemon> partyPokemon, List<List<Pokemon>> boxes) {
         this.fileLocation = fileLocation;
         this.trainer = trainer;
-        this.partyPokemon = partyPokemon;
-        this.boxes = boxes;
+        this.partyPokemon = new PokemonList(partyPokemon, 6);
+        for (final List<Pokemon> box : boxes) {
+            this.boxes.add(new PokemonList(box, 20));
+        }
     }
 
-    private static String pokemonListToString(List<Pokemon> pokemonList) {
+    private static String pokemonListToString(PokemonList pokemonList) {
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Number of pokemon: ").append(pokemonList.size()).append("\n");
-        for (final Pokemon pokemon : pokemonList) {
+        for (final Pokemon pokemon : pokemonList.getPokemon()) {
             stringBuilder.append(pokemon.toString()).append("\n");
         }
         return stringBuilder.toString();
@@ -32,11 +35,11 @@ public class SaveFile {
         return trainer;
     }
 
-    public List<Pokemon> getPartyPokemon() {
+    public PokemonList getPartyPokemon() {
         return partyPokemon;
     }
 
-    public List<List<Pokemon>> getBoxes() {
+    public List<PokemonList> getBoxes() {
         return boxes;
     }
 
@@ -48,7 +51,7 @@ public class SaveFile {
         builder.append("Party Pokemon: \n");
         builder.append(pokemonListToString(partyPokemon)).append("\n");
         int boxNumber = 1;
-        for (final List<Pokemon> box : boxes) {
+        for (final PokemonList box : boxes) {
             builder.append("\nBox ").append(boxNumber).append("\n");
             builder.append(pokemonListToString(box));
             boxNumber++;

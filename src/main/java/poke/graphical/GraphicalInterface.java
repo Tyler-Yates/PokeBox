@@ -1,6 +1,7 @@
 package poke.graphical;
 
 import poke.data.Pokemon;
+import poke.data.PokemonList;
 import poke.data.SaveFile;
 import poke.decode.SaveFileReader;
 import poke.graphical.elements.Element;
@@ -70,7 +71,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         }
     }
 
-    private void addNewPokemonList(List<Pokemon> pokemonList, String name) {
+    private void addNewPokemonList(PokemonList pokemonList, String name) {
         elements.add(new PokemonListElement(this, pokemonList, name));
         pokemonListIndexToName.put(pokemonListIndexToName.size(), name);
     }

@@ -1,6 +1,9 @@
 package poke.graphical.elements;
 
 import poke.data.Pokemon;
+import poke.data.PokemonBuilder;
+import poke.data.PokemonList;
+import poke.data.Species;
 import poke.graphical.GraphicalInterface;
 import poke.util.ImageLoader;
 
@@ -18,11 +21,11 @@ public class PokemonListElement extends Element {
     private static final int left = 200;
     private static final int top = 70;
 
-    private final List<Pokemon> pokemonList;
+    private final PokemonList pokemonList;
     private final String name;
     private final List<PokemonElement> pokemonElements = new ArrayList<>();
 
-    public PokemonListElement(GraphicalInterface graphicalInterface, List<Pokemon> pokemonList, String name) {
+    public PokemonListElement(GraphicalInterface graphicalInterface, PokemonList pokemonList, String name) {
         super(graphicalInterface);
         this.pokemonList = pokemonList;
         this.name = name;
@@ -36,7 +39,16 @@ public class PokemonListElement extends Element {
             } else {
                 x += separation;
             }
-            pokemonElements.add(new PokemonElement(graphicalInterface, x, y, pokemonList.get(i)));
+            pokemonElements.add(new PokemonElement(graphicalInterface, x, y, pokemonList.getPokemon().get(i)));
+        }
+        for (int i = pokemonList.size(); i < pokemonList.getMaxCapacity(); i++) {
+            if (i % 5 == 0) {
+                x = left;
+                y += separation;
+            } else {
+                x += separation;
+            }
+            pokemonElements.add(new EmptyPokemonElement(graphicalInterface, x, y));
         }
     }
 
@@ -83,9 +95,9 @@ public class PokemonListElement extends Element {
 }
 
 class PokemonElement extends Element {
-    private final int x;
-    private final int y;
-    private final Pokemon pokemon;
+    protected final int x;
+    protected final int y;
+    protected final Pokemon pokemon;
 
     private BufferedImage bufferedImage;
     private Rectangle rectangle;
@@ -127,5 +139,41 @@ class PokemonElement extends Element {
                 g.drawRect(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
             }
         }
+    }
+}
+
+class EmptyPokemonElement extends PokemonElement {
+    private boolean hover = false;
+    private BufferedImage baseImage;
+    private Rectangle rectangle;
+
+    public EmptyPokemonElement(GraphicalInterface graphicalInterface, int x, int y) {
+        super(graphicalInterface, x, y, new PokemonBuilder().setSpecies(Species.Abra).createPokemon());
+
+        baseImage = ImageLoader.getImageForPokemon(pokemon);
+        if (baseImage != null) {
+            rectangle = new Rectangle(x, y, baseImage.getWidth(), baseImage.getHeight());
+        }
+    }
+
+    @Override
+    public void handleClick(int x, int y, int mouseButton) {
+
+    }
+
+    @Override
+    public void handleHover(int x, int y) {
+        hover = rectangle != null && rectangle.contains(x, y);
+        graphicalInterface.repaint();
+    }
+
+    @Override
+    public void draw(Graphics g, JFrame frame) {
+        if (hover) {
+            g.setColor(Color.BLACK);
+        } else {
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.drawRect(x, y, baseImage.getWidth(), baseImage.getHeight());
     }
 }
