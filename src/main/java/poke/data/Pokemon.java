@@ -281,4 +281,174 @@ public class Pokemon {
                 ", nickname=" + nickname +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final Pokemon pokemon = (Pokemon) o;
+
+        if (currentHp != pokemon.currentHp) {
+            return false;
+        }
+        if (catchRate != pokemon.catchRate) {
+            return false;
+        }
+        if (originalTrainerId != pokemon.originalTrainerId) {
+            return false;
+        }
+        if (xp != pokemon.xp) {
+            return false;
+        }
+        if (hpEv != pokemon.hpEv) {
+            return false;
+        }
+        if (attackEv != pokemon.attackEv) {
+            return false;
+        }
+        if (defenseEv != pokemon.defenseEv) {
+            return false;
+        }
+        if (speedEv != pokemon.speedEv) {
+            return false;
+        }
+        if (specialEv != pokemon.specialEv) {
+            return false;
+        }
+        if (attackIv != pokemon.attackIv) {
+            return false;
+        }
+        if (defenseIv != pokemon.defenseIv) {
+            return false;
+        }
+        if (speedIv != pokemon.speedIv) {
+            return false;
+        }
+        if (specialIv != pokemon.specialIv) {
+            return false;
+        }
+        if (hpIv != pokemon.hpIv) {
+            return false;
+        }
+        if (currentMove1pp != pokemon.currentMove1pp) {
+            return false;
+        }
+        if (currentMove2pp != pokemon.currentMove2pp) {
+            return false;
+        }
+        if (currentMove3pp != pokemon.currentMove3pp) {
+            return false;
+        }
+        if (currentMove4pp != pokemon.currentMove4pp) {
+            return false;
+        }
+        if (move1ppUps != pokemon.move1ppUps) {
+            return false;
+        }
+        if (move2ppUps != pokemon.move2ppUps) {
+            return false;
+        }
+        if (move3ppUps != pokemon.move3ppUps) {
+            return false;
+        }
+        if (move4ppUps != pokemon.move4ppUps) {
+            return false;
+        }
+        if (level != pokemon.level) {
+            return false;
+        }
+        if (maxHp != pokemon.maxHp) {
+            return false;
+        }
+        if (attack != pokemon.attack) {
+            return false;
+        }
+        if (defense != pokemon.defense) {
+            return false;
+        }
+        if (speed != pokemon.speed) {
+            return false;
+        }
+        if (special != pokemon.special) {
+            return false;
+        }
+        if (species != pokemon.species) {
+            return false;
+        }
+        if (statusCondition != pokemon.statusCondition) {
+            return false;
+        }
+        if (type1 != pokemon.type1) {
+            return false;
+        }
+        if (type2 != pokemon.type2) {
+            return false;
+        }
+        if (move1 != pokemon.move1) {
+            return false;
+        }
+        if (move2 != pokemon.move2) {
+            return false;
+        }
+        if (move3 != pokemon.move3) {
+            return false;
+        }
+        if (move4 != pokemon.move4) {
+            return false;
+        }
+        if (originalTrainerName != null ? !originalTrainerName.equals(pokemon
+                .originalTrainerName) : pokemon.originalTrainerName != null) {
+            return false;
+        }
+        return !(nickname != null ? !nickname.equals(pokemon.nickname) : pokemon.nickname != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = species != null ? species.hashCode() : 0;
+        result = 31 * result + currentHp;
+        result = 31 * result + (statusCondition != null ? statusCondition.hashCode() : 0);
+        result = 31 * result + (type1 != null ? type1.hashCode() : 0);
+        result = 31 * result + (type2 != null ? type2.hashCode() : 0);
+        result = 31 * result + catchRate;
+        result = 31 * result + (move1 != null ? move1.hashCode() : 0);
+        result = 31 * result + (move2 != null ? move2.hashCode() : 0);
+        result = 31 * result + (move3 != null ? move3.hashCode() : 0);
+        result = 31 * result + (move4 != null ? move4.hashCode() : 0);
+        result = 31 * result + originalTrainerId;
+        result = 31 * result + xp;
+        result = 31 * result + hpEv;
+        result = 31 * result + attackEv;
+        result = 31 * result + defenseEv;
+        result = 31 * result + speedEv;
+        result = 31 * result + specialEv;
+        result = 31 * result + attackIv;
+        result = 31 * result + defenseIv;
+        result = 31 * result + speedIv;
+        result = 31 * result + specialIv;
+        result = 31 * result + hpIv;
+        result = 31 * result + currentMove1pp;
+        result = 31 * result + currentMove2pp;
+        result = 31 * result + currentMove3pp;
+        result = 31 * result + currentMove4pp;
+        result = 31 * result + move1ppUps;
+        result = 31 * result + move2ppUps;
+        result = 31 * result + move3ppUps;
+        result = 31 * result + move4ppUps;
+        result = 31 * result + level;
+        result = 31 * result + maxHp;
+        result = 31 * result + attack;
+        result = 31 * result + defense;
+        result = 31 * result + speed;
+        result = 31 * result + special;
+        result = 31 * result + (originalTrainerName != null ? originalTrainerName.hashCode() : 0);
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        return result;
+    }
 }
