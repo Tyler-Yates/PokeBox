@@ -43,7 +43,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
     private int currentPokemonList = 0;
-    private Pokemon currentPokemon = null;
+    private Pokemon currentMousedOverPokemon = null;
     private Pokemon currentSelectedPokemon = null;
     private TooltipElement tooltipElement = null;
 
@@ -113,12 +113,16 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         return pokemonListIndexToName.get(currentPokemonList);
     }
 
-    public Pokemon getCurrentPokemon() {
-        return currentPokemon;
+    public Pokemon getCurrentMousedOverPokemon() {
+        return currentMousedOverPokemon;
     }
 
-    public void setCurrentPokemon(Pokemon pokemon) {
-        this.currentPokemon = pokemon;
+    public void setCurrentMousedOverPokemon(Pokemon pokemon) {
+        this.currentMousedOverPokemon = pokemon;
+    }
+
+    public void resetCurrentMousedOverPokemon() {
+        this.currentMousedOverPokemon = null;
     }
 
     public Pokemon getCurrentSelectedPokemon() {
@@ -206,7 +210,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
 
     void changePokemonList(int amount) {
         currentPokemonList += amount;
-        setCurrentPokemon(null);
+        resetCurrentMousedOverPokemon();
         resetSelectedPokemon();
         for (final Element element : elements) {
             if (element.isVisible()) {
@@ -290,15 +294,15 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     public void mouseMoved(MouseEvent e) {
         final TooltipElement originalTooltip = tooltipElement;
         tooltipElement = null;
-        final Pokemon originalPokemon = getCurrentPokemon();
-        setCurrentPokemon(null);
+        final Pokemon originalPokemon = getCurrentMousedOverPokemon();
+        resetCurrentMousedOverPokemon();
         for (final Element element : elements) {
             if (element.isVisible()) {
                 element.handleHover(getX(e), getY(e));
             }
         }
 
-        if (originalPokemon != getCurrentPokemon() || originalTooltip != tooltipElement) {
+        if (originalPokemon != getCurrentMousedOverPokemon() || originalTooltip != tooltipElement) {
             repaint();
         }
     }

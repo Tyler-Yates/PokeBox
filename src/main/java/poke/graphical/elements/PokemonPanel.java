@@ -105,7 +105,7 @@ public class PokemonPanel extends Element {
     private Pokemon getPokemon() {
         final Pokemon selectedPokemon = graphicalInterface.getCurrentSelectedPokemon();
         if (selectedPokemon == null) {
-            return graphicalInterface.getCurrentPokemon();
+            return graphicalInterface.getCurrentMousedOverPokemon();
         }
         return selectedPokemon;
     }

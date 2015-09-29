@@ -138,7 +138,7 @@ class PokemonElement extends Element {
     public void handleHover(int x, int y) {
         hover = false;
         if (rectangle != null && rectangle.contains(x, y)) {
-            graphicalInterface.setCurrentPokemon(pokemon);
+            graphicalInterface.setCurrentMousedOverPokemon(pokemon);
             hover = true;
         }
     }
