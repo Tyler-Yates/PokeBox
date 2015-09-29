@@ -44,6 +44,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     private Map<Integer, String> pokemonListIndexToName = new HashMap<>();
     private int currentPokemonList = 0;
     private Pokemon currentPokemon = null;
+    private Pokemon currentSelectedPokemon = null;
     private TooltipElement tooltipElement = null;
 
     private int mouseX;
@@ -120,6 +121,20 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
         this.currentPokemon = pokemon;
     }
 
+    public Pokemon getCurrentSelectedPokemon() {
+        return currentSelectedPokemon;
+    }
+
+    public void setCurrentSelectedPokemon(Pokemon pokemon) {
+        this.currentSelectedPokemon = pokemon;
+        repaint();
+    }
+
+    public void resetSelectedPokemon() {
+        setCurrentSelectedPokemon(null);
+        repaint();
+    }
+
     public void setTooltipElement(int x, int y, String text) {
         this.tooltipElement = new TooltipElement(x, y, text);
     }
@@ -192,6 +207,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     void changePokemonList(int amount) {
         currentPokemonList += amount;
         setCurrentPokemon(null);
+        resetSelectedPokemon();
         for (final Element element : elements) {
             if (element.isVisible()) {
                 element.handleHover(mouseX, mouseY);

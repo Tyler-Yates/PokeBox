@@ -1,5 +1,6 @@
 package poke.graphical.elements;
 
+import javafx.scene.input.MouseButton;
 import poke.data.Pokemon;
 import poke.data.PokemonBuilder;
 import poke.data.PokemonList;
@@ -35,6 +36,7 @@ public class PokemonListElement extends Element {
 
     @Override
     public void handleClick(int x, int y, int mouseButton) {
+        graphicalInterface.resetSelectedPokemon();
         for (final PokemonElement pokemonElement : pokemonElements) {
             if (pokemonElement.isVisible()) {
                 pokemonElement.handleClick(x, y, mouseButton);
@@ -127,7 +129,9 @@ class PokemonElement extends Element {
 
     @Override
     public void handleClick(int x, int y, int mouseButton) {
-
+        if (rectangle != null && rectangle.contains(x, y) && mouseButton == MouseButton.PRIMARY.ordinal()) {
+            graphicalInterface.setCurrentSelectedPokemon(pokemon);
+        }
     }
 
     @Override
@@ -143,7 +147,11 @@ class PokemonElement extends Element {
     public void draw(Graphics g, JFrame frame) {
         if (bufferedImage != null) {
             g.drawImage(bufferedImage, x, y, frame);
-            if (hover) {
+            if (pokemon == graphicalInterface.getCurrentSelectedPokemon()) {
+                g.setColor(Color.RED);
+                g.drawRect(x - 1, y - 1, bufferedImage.getWidth() + 2, bufferedImage.getHeight() + 2);
+                g.drawRect(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
+            } else if (hover) {
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, bufferedImage.getWidth(), bufferedImage.getHeight());
             }

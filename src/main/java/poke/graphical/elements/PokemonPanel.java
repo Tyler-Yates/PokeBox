@@ -49,7 +49,7 @@ public class PokemonPanel extends Element {
         g.fillRect(left, 30, width, frame.getHeight());
 
         final int textX = left + 10;
-        final Pokemon pokemon = graphicalInterface.getCurrentPokemon();
+        final Pokemon pokemon = getPokemon();
         if (pokemon == null) {
             return;
         }
@@ -100,6 +100,14 @@ public class PokemonPanel extends Element {
     @Override
     public boolean isVisible() {
         return true;
+    }
+
+    private Pokemon getPokemon() {
+        final Pokemon selectedPokemon = graphicalInterface.getCurrentSelectedPokemon();
+        if (selectedPokemon == null) {
+            return graphicalInterface.getCurrentPokemon();
+        }
+        return selectedPokemon;
     }
 
     private int drawMove(Graphics g, int x, int y, int index, Move move, int currentPp, int ppUps) {
