@@ -148,7 +148,7 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
                 }
             }
             if (tooltipElement != null) {
-                tooltipElement.draw(g);
+                tooltipElement.draw(g, frame);
             }
         }
     }
