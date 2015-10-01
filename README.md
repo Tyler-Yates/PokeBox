@@ -2,7 +2,12 @@
 PokéBox is a Java application for viewing pokemon contained in emulator save files. Currently the program is only targeted at generation I save files (Red, Blue, and Yellow), but later generations may be added in the future.
 
 ## Running the Program
-To graphically view a save file, run the `main()` method of the `PokeBox` class under the `poke.graphical` package. The program will then prompt you to select the save file you want to view. Additionally, you can pass the full filepath of the save file to the program as the first argument to avoid having to choose the file.
+To graphically view a save file, run the `main()` method of the `PokeBox` class under the `poke.graphical` package. Since this project uses Maven to manage dependencies you can run:
+```
+mvn install
+mvn exec:java -Dexec.mainClass="poke.graphical.PokeBox"
+```
+The program will then prompt you to select the save file you want to view. Additionally, you can pass the full filepath of the save file to the program as the first argument to avoid having to choose the file.
 
 ## Controls
 ### Loading a Save File
