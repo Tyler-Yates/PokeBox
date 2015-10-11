@@ -10,7 +10,7 @@ public class Badges {
 
     public Badges(byte b) {
         for (int i = 0; i < hasBadge.length; i++) {
-            hasBadge[i] = BigInteger.valueOf(Byte.toUnsignedInt(b)).testBit(0);
+            hasBadge[i] = BigInteger.valueOf(Byte.toUnsignedInt(b)).testBit(i);
         }
 
         final StringBuilder stringBuilder = new StringBuilder("Badges Earned: [");
