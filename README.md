@@ -28,6 +28,9 @@ PokéBox has been tested to work with [VBA-M](http://vba-m.com/) save files. If 
 ![Party View](/screenshots/party_view.png?raw=true "Party View")
 ![Box View](/screenshots/box_view.png?raw=true "Box View")
 
+## Bonus
+Don't want to play through the entire game? Head over to [src/test/resources](https://github.com/Tyler-Yates/PokeBox/tree/master/src/test/resources) to download a completed game save. The save has all badges, all three [legendary birds](http://bulbapedia.bulbagarden.net/wiki/Legendary_birds), and [Mewtwo](http://bulbapedia.bulbagarden.net/wiki/Mewtwo_%28Pok%C3%A9mon%29).
+
 ## Origin
 PokéBox started as a hackathon project for [HackTX](http://hacktx.com/) 2015 by [Tyler Yates](https://github.com/Tyler-Yates).
 
