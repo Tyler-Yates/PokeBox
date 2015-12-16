@@ -24,7 +24,7 @@ public class ImageLoader {
      *
      * @return the image or {@code null} if the image could not be found
      */
-    public static BufferedImage loadImage(String name) {
+    private static BufferedImage loadImage(String name) {
         final BufferedImage bufferedImage = cache.get(name);
         if (bufferedImage != null) {
             return bufferedImage;
