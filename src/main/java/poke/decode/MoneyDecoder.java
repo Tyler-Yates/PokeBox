@@ -14,7 +14,7 @@ class MoneyDecoder {
 
              For example: 00110000 corresponds to 30
               */
-            final String string = StringUtils.leftPad(Integer.toBinaryString(b), 8, '0');
+            final String string = StringUtils.leftPad(Integer.toBinaryString(Byte.toUnsignedInt(b)), 8, '0');
             stringBuilder.append(Integer.parseInt(string.substring(0, 4), 2));
             stringBuilder.append(Integer.parseInt(string.substring(4, 8), 2));
         }
