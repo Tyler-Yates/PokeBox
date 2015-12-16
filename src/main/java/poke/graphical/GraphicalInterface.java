@@ -201,15 +201,21 @@ public class GraphicalInterface extends JPanel implements KeyListener, MouseList
     public void keyReleased(KeyEvent e) {
         if (Character.toUpperCase(e.getKeyChar()) == 'L') {
             chooseSaveFile();
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT && currentPokemonList > 0) {
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             changePokemonList(-1);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && currentPokemonList < 12) {
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             changePokemonList(1);
         }
     }
 
     void changePokemonList(int amount) {
         currentPokemonList += amount;
+        if (currentPokemonList < 0) {
+            currentPokemonList = pokemonListIndexToName.size() - 1;
+        } else if (currentPokemonList >= pokemonListIndexToName.size()) {
+            currentPokemonList = 0;
+        }
+
         resetCurrentMousedOverPokemon();
         resetSelectedPokemon();
         for (final Element element : elements) {
