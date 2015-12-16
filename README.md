@@ -14,7 +14,9 @@ The program will then prompt you to select the save file you want to view. Addit
 Press the 'L' key to load a save file into PokéBox. If you already have a save file loaded, you will see its full filepath at the top of the program. You can also click this filepath to load a save file.
 
 ### Navigating
-Once the save file is loaded you will be presented with a view of all of the Pokémon in your party. PokéBox uses a view for each group of Pokémon in your save file: Party, PC Box 1, PC Box 2, ... , PC Box 12. Use the right arrow key to look at the next view in the sequence. If you are looking at the Party view, pressing the right arrow key will take you to the PC Box 1 view. Use the left arrow key to look at the previous view in the sequence. If you are looking at the PC Box 12 view, pressing the left arrow key will take you to the PC Box 11 view. Navigation supports wrapping, so if you are looking at the Party view, pressing the left arrow key will tak you to the PC Box 12 view.
+Once the save file is loaded you will be able to see all of the Pokémon in your save file. PokéBox uses a view for each group of Pokémon in your save file. There are thirteen groups of Pokémon in a save file: one party and twelve PC boxes. Up to six Pokémon can be in the party and up to twenty Pokémon can be in each PC box.
+
+The view order is: Party, PC Box 1, PC Box 2, ..., PC Box 12. Use the right arrow key to look at the next view in the sequence. If you are looking at the Party view, pressing the right arrow key will take you to the PC Box 1 view. Use the left arrow key to look at the previous view in the sequence. If you are looking at the PC Box 12 view, pressing the left arrow key will take you to the PC Box 11 view. Navigation supports wrapping, so if you are looking at the Party view, pressing the left arrow key will tak you to the PC Box 12 view.
 
 ### Viewing Pokémon Information
 To view detailed information about a Pokémon, hover over it with your mouse. The details will be shown on the right side of the screen. 
