@@ -1,6 +1,7 @@
 package poke.data;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Badges {
     private static final String[] badgeNames = {"Boulder", "Cascade", "Thunder", "Rainbow", "Soul", "Marsh",
@@ -38,5 +39,22 @@ public class Badges {
 
     public String toString() {
         return toString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Badges badges = (Badges) o;
+        return Arrays.equals(hasBadge, badges.hasBadge);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(hasBadge);
     }
 }
