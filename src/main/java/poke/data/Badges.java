@@ -7,6 +7,7 @@ public class Badges {
     private static final String[] badgeNames = {"Boulder", "Cascade", "Thunder", "Rainbow", "Soul", "Marsh",
             "Volcano", "Earth"};
     private final boolean[] hasBadge = new boolean[badgeNames.length];
+    private final int badgesObtained;
     private final String toString;
 
     public Badges(byte b) {
@@ -15,11 +16,14 @@ public class Badges {
         }
 
         final StringBuilder stringBuilder = new StringBuilder("Badges Earned: [");
+        int badges = 0;
         for (int i = 0; i < hasBadge.length; i++) {
             if (hasBadge[i]) {
                 stringBuilder.append(badgeNames[i]).append(", ");
+                badges++;
             }
         }
+        badgesObtained = badges;
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         stringBuilder.append(']');
@@ -35,6 +39,15 @@ public class Badges {
 
     public boolean hasBadge(int index) {
         return hasBadge[index];
+    }
+
+    /**
+     * Returns the total number of badges obtained.
+     *
+     * @return the total number of badges obtained
+     */
+    public int numBadgesObtained() {
+        return badgesObtained;
     }
 
     public String toString() {
