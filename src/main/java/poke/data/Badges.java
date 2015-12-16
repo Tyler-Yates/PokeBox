@@ -24,8 +24,10 @@ public class Badges {
             }
         }
         badgesObtained = badges;
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        if (badges > 0) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
         stringBuilder.append(']');
         toString = stringBuilder.toString();
     }
